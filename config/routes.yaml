@@ -1,11 +1,9 @@
-# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+# config/routes.yaml
+# Подключаем контроллеры с атрибутами
+auth_controllers:
+    resource: '../src/Auth/Controller/'
+    type: attribute
 
-# This file is the entry point to configure the routes of your app.
-# Methods with the #[Route] attribute are automatically imported.
-# See also https://symfony.com/doc/current/routing.html
-
-# To list all registered routes, run the following command:
-#   bin/console debug:router
-
-controllers:
-    resource: routing.controllers
+# Явно добавляем login_check для firewall json_login
+login_check:
+    path: /auth/login
