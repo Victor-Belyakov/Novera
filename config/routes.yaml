@@ -1,9 +1,0 @@
-# config/routes.yaml
-# Подключаем контроллеры с атрибутами
-auth_controllers:
-    resource: '../src/Auth/Controller/'
-    type: attribute
-
-# Явно добавляем login_check для firewall json_login
-login_check:
-    path: /auth/login
