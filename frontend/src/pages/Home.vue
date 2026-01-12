@@ -1,149 +1,87 @@
 <template>
-  <div class="min-h-screen min-w-screen bg-blue-950 flex flex-col items-center justify-center">
-    <div class="bg-gray-300 p-10 rounded-2xl shadow-1xl w-full max-w-md">
-      <div class="flex justify-center mb-4">
-        <img :src="logoImg" alt="Logo" class="max-w-full h-auto" />
-      </div>
-      <form @submit.prevent="isRegisterMode ? register() : login()" class="flex flex-col gap-4">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-          {{ isRegisterMode ? 'Регистрация' : 'Вход' }}
-        </h2>
-        <input
-            v-if="isRegisterMode"
-            v-model="name"
-            type="text"
-            placeholder="Имя"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
-            required
-        />
-        <input
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
-            required
-        />
-        <input
-            v-model="password"
-            type="password"
-            placeholder="Пароль"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
-            required
-        />
-        <button
-            type="submit"
-            class="bg-blue-950 text-white py-2 rounded-md font-semibold hover:bg-blue-900 transition cursor-pointer"
-        >
-          {{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}
-        </button>
-        <button
-            type="button"
-            @click="isRegisterMode = !isRegisterMode; name = ''"
-            class="text-blue-950 py-2 rounded-md font-semibold hover:underline transition cursor-pointer"
-        >
-          {{ isRegisterMode ? 'Уже есть аккаунт? Войти' : 'Нет аккаунта? Зарегистрироваться' }}
-        </button>
-      </form>
+  <div class="h-screen flex flex-col">
+    <AppNavbar />
+
+    <div class="flex flex-1 overflow-hidden">
+      <AppSidebar
+        :active-menu="activeMenu"
+        :is-collapsed="isCollapsed"
+        :menu-items="menuItems"
+        @update-active="activeMenu = $event"
+        @toggle-collapse="isCollapsed = !isCollapsed"
+      />
+
+      <main :class="['flex-1 bg-gray-50', activeMenu === 'home' ? 'flex flex-col overflow-hidden' : 'p-6 overflow-y-auto']">
+          <h2 v-if="activeMenu !== 'home'" class="text-2xl font-semibold text-gray-900 mb-6">{{ pageTitle }}</h2>
+          <component :is="currentComponent" v-bind="componentProps" />
+      </main>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import logoImg from '@/assets/logo.png'
-import { apiPost, handleResponse, setToken, setRefreshToken } from '@/api'
+import { ref, computed, watch, provide } from 'vue'
+import { useRoute } from 'vue-router'
+import AppSidebar from '@/components/AppSidebar.vue'
+import AppNavbar from '@/components/AppNavbar.vue'
+import HomeContent from './Home/HomeContent.vue'
+import UserContent from './Home/UserContent.vue'
+import SettingsContent from './Home/SettingsContent.vue'
+import { useAuth } from '@/composables/useAuth'
+import { MENU_ITEMS } from '@/constants/menu'
+import { ROUTES } from '@/constants/routes'
 
-const router = useRouter()
+const route = useRoute()
 
-const email = ref('')
-const password = ref('')
-const name = ref('')
-const isRegisterMode = ref(false)
+const activeMenu = ref('home')
+const isCollapsed = ref(false)
 
-const login = async () => {
-  try {
-    const response = await apiPost('/api/auth/login', {
-      email: email.value,
-      password: password.value
-    })
+// Функция для сброса activeMenu (предоставляется дочерним компонентам)
+const resetActiveMenu = (menu = 'home') => {
+  activeMenu.value = menu
+}
 
-    const data = await handleResponse(response)
-    console.log('Успешно вошли:', data)
+// Предоставляем функцию дочерним компонентам
+provide('resetActiveMenu', resetActiveMenu)
 
-    if (data && data.token) {
-      // Сохраняем токены
-      setToken(data.token)
-      if (data.refresh_token) {
-        setRefreshToken(data.refresh_token)
-      }
-
-      // Проверяем, что токен действительно сохранен
-      const savedToken = localStorage.getItem('token')
-      console.log('Токен сохранен после setToken:', !!savedToken, savedToken ? savedToken.substring(0, 30) + '...' : 'null')
-
-      if (!savedToken) {
-        console.error('Критическая ошибка: токен не был сохранен')
-        alert('Ошибка: не удалось сохранить токен')
-        return
-      }
-
-      // Небольшая задержка, чтобы убедиться, что токен точно сохранен
-      await nextTick()
-
-      // Проверяем токен еще раз перед редиректом
-      const tokenBeforeRedirect = localStorage.getItem('token')
-      console.log('Токен перед редиректом:', !!tokenBeforeRedirect)
-
-      if (tokenBeforeRedirect) {
-        // Используем router.replace для программной навигации
-        // Роутер должен увидеть токен, так как он уже сохранен в localStorage
-        console.log('Используем router.replace для перехода на /dashboard')
-        router.replace('/dashboard').then(() => {
-          console.log('Редирект выполнен успешно через router')
-        }).catch((error) => {
-          console.error('Ошибка при редиректе через router:', error)
-          // Запасной вариант - полная перезагрузка страницы
-          window.location.href = '/dashboard'
-        })
-      } else {
-        console.error('Токен исчез после сохранения!')
-        alert('Ошибка: токен не был сохранен')
-      }
-    } else {
-      console.error('Токен не найден в ответе:', data)
-      alert('Ошибка: токен не получен')
+// Отслеживаем изменения роута и обновляем activeMenu
+watch(
+  () => route.path,
+  (newPath) => {
+    if (newPath === ROUTES.HOME) {
+      activeMenu.value = 'home'
+    } else if (newPath === ROUTES.USER) {
+      activeMenu.value = 'profile'
     }
-  } catch (err) {
-    console.error('Ошибка при входе:', err)
-    alert(err.message || 'Ошибка при входе')
-  }
+  },
+  { immediate: true }
+)
+
+const menuItems = MENU_ITEMS
+
+// Маппинг компонентов для динамической загрузки
+const components = {
+  home: HomeContent,
+  profile: UserContent,
+  settings: SettingsContent,
 }
 
-const register = async () => {
-  if (!isRegisterMode.value) {
-    isRegisterMode.value = true
-    return
-  }
+// Текущий компонент на основе activeMenu
+const currentComponent = computed(() => {
+  return components[activeMenu.value] || HomeContent
+})
 
-  if (!name.value || !email.value || !password.value) {
-    alert('Заполните все поля')
-    return
-  }
+// Props для компонентов
+const componentProps = computed(() => {
+  return {}
+})
 
-  try {
-    const response = await apiPost('/api/auth/register', {
-      name: name.value,
-      email: email.value,
-      password: password.value
-    })
-
-    await handleResponse(response)
-    alert('Регистрация успешна! Теперь вы можете войти.')
-    isRegisterMode.value = false
-    name.value = ''
-  } catch (err) {
-    alert(err.message || 'Ошибка при регистрации')
+const pageTitle = computed(() => {
+  const titles = {
+    home: 'Главная',
+    profile: 'Пользователь',
+    settings: 'Настройки',
   }
-}
+  return titles[activeMenu.value] || 'Главная'
+})
 </script>

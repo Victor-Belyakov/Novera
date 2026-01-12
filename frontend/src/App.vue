@@ -1,19 +1,8 @@
 <script setup>
+import AppAlert from '@/components/AppAlert.vue'
 </script>
 
 <template>
   <router-view />
+  <AppAlert />
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-  }
-}
-</style>

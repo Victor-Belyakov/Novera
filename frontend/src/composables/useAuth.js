@@ -1,54 +1,68 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { removeToken, hasToken } from '@/api'
+import { removeToken, getToken, setToken, refreshAccessToken } from '@/api'
+import { ROUTES, ROUTE_NAMES } from '@/constants/routes'
+import { parseJwt, isTokenExpired } from '@/utils/jwt'
 
 const userEmail = ref('')
-const token = ref(localStorage.getItem('token') || null)
+const token = ref(getToken() || null)
 const router = useRouter()
 
-function parseJwt(jwt) {
-    try {
-        const payload = jwt.split('.')[1]
-        return JSON.parse(atob(payload))
-    } catch (e) {
-        return null
-    }
-}
-
-// Обновление данных пользователя из токена
-function loadUserFromToken() {
-    if (!token.value) return
-    const payload = parseJwt(token.value)
-    if (!payload) return
-
-    const now = Math.floor(Date.now() / 1000)
-    if (payload.exp && payload.exp < now) {
-        logout()
-        return
-    }
-
-    userEmail.value = payload.email || ''
-}
-
-// Функция выхода
-function logout() {
-    removeToken()
-    localStorage.removeItem('token')
+async function loadUserFromToken() {
+  let currentToken = getToken()
+  if (!currentToken) {
     token.value = null
     userEmail.value = ''
-    router.push({ name: 'Home' }) // редирект на страницу авторизации
+    return
+  }
+
+  const payload = parseJwt(currentToken)
+  if (!payload) {
+    userEmail.value = ''
+    return
+  }
+
+  // Если токен истек, пытаемся обновить его
+  if (isTokenExpired(payload)) {
+    const newToken = await refreshAccessToken()
+    if (newToken) {
+      currentToken = newToken
+      token.value = newToken
+    } else {
+      // Если обновление не удалось, выходим
+      logout()
+      return
+    }
+  }
+
+  if (token.value !== currentToken) {
+    token.value = currentToken
+  }
+
+  const updatedPayload = parseJwt(currentToken)
+  if (updatedPayload) {
+    userEmail.value = updatedPayload.email || ''
+  }
 }
 
-// Функция логина: записываем токен и обновляем reactive данные
+function logout() {
+  removeToken()
+  token.value = null
+  userEmail.value = ''
+  
+  // Принудительный редирект на страницу логина
+  // Используем window.location для гарантированного редиректа
+  window.location.href = ROUTES.LOGIN
+}
+
 function login(newToken) {
-    localStorage.setItem('token', newToken)
-    token.value = newToken
-    loadUserFromToken() // обновляем userEmail сразу
+  setToken(newToken)
+  token.value = newToken
+  loadUserFromToken()
 }
 
 const isAuthenticated = computed(() => !!token.value && !!userEmail.value)
 
-// Инициализация при старте
 loadUserFromToken()
 
 export function useAuth() {

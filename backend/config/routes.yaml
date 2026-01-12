@@ -5,6 +5,11 @@ auth_controllers:
     type: attribute
     prefix: /api
 
+user_controllers:
+    resource: '../src/User/Controller/'
+    type: attribute
+    prefix: /api
+
 # Явно добавляем login_check для firewall json_login
 login_check:
     path: /api/auth/login

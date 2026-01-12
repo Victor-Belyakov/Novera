@@ -7,6 +7,7 @@ return [
     'app_auth_logout__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\LogoutController'], [], [['text', '/api/auth/logout']], [], [], []],
     'app_auth_refreshtoken__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\RefreshTokenController'], [], [['text', '/api/auth/refresh']], [], [], []],
     'app_auth_register__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\RegisterController'], [], [['text', '/api/auth/register']], [], [], []],
+    'app_user_user_getcurrentuser' => [[], ['_controller' => 'App\\User\\Controller\\UserController::getCurrentUser'], [], [['text', '/api/user']], [], [], []],
     'login_check' => [[], [], [], [['text', '/api/auth/login']], [], [], []],
     'App\Auth\Controller\LogoutController' => [[], ['_controller' => 'App\\Auth\\Controller\\LogoutController'], [], [['text', '/api/auth/logout']], [], [], []],
     'App\Auth\Controller\LogoutController::__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\LogoutController'], [], [['text', '/api/auth/logout']], [], [], []],
@@ -14,4 +15,5 @@ return [
     'App\Auth\Controller\RefreshTokenController::__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\RefreshTokenController'], [], [['text', '/api/auth/refresh']], [], [], []],
     'App\Auth\Controller\RegisterController::__invoke' => [[], ['_controller' => 'App\\Auth\\Controller\\RegisterController'], [], [['text', '/api/auth/register']], [], [], []],
     'App\Auth\Controller\RegisterController' => [[], ['_controller' => 'App\\Auth\\Controller\\RegisterController'], [], [['text', '/api/auth/register']], [], [], []],
+    'App\User\Controller\UserController::getCurrentUser' => [[], ['_controller' => 'App\\User\\Controller\\UserController::getCurrentUser'], [], [['text', '/api/user']], [], [], []],
 ];

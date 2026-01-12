@@ -2,6 +2,8 @@
 
 namespace App\User\Infrastructure\Persistence;
 
+use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -14,7 +16,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $email;
@@ -24,6 +26,18 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     public string $password;
+
+    #[ORM\Column(type: 'string')]
+    private string $name;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $middle_name = null;
+
+    #[ORM\Column(type: 'string')]
+    private string $last_name;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private DateTimeImmutable $dateOfBirth;
 
     /**
      * @return int|null
@@ -95,6 +109,91 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getDateOfBirth(): DateTimeImmutable
+    {
+        return $this->dateOfBirth;
+    }
+
+    /**
+     * @param DateTimeImmutable $dateOfBirth
+     * @return $this
+     */
+    public function setDateOfBirth(DateTimeImmutable $dateOfBirth): UserEntity
+    {
+        $this->dateOfBirth = $dateOfBirth;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name): UserEntity
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMiddleName(): ?string
+    {
+        return $this->middle_name;
+    }
+
+    /**
+     * @param string|null $middle_name
+     * @return $this
+     */
+    public function setMiddleName(?string $middle_name): UserEntity
+    {
+        $this->middle_name = $middle_name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * @param string $last_name
+     * @return $this
+     */
+    public function setLastName(string $last_name): UserEntity
+    {
+        $this->last_name = $last_name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return sprintf(
+            '%s %s %s',
+            $user->last_name,
+            $user->first_name,
+            $user->middle_name
+        );
     }
 
     /**

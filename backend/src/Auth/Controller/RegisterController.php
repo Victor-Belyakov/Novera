@@ -2,38 +2,39 @@
 
 namespace App\Auth\Controller;
 
-use App\User\Infrastructure\Persistence\UserEntity;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Auth\Application\DTO\RegisterRequestDto;
+use App\Auth\Application\Service\RegisterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class RegisterController extends AbstractController
 {
-    /**
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     * @param UserPasswordHasherInterface $hasher
-     * @return JsonResponse
-     */
+    public function __construct(
+        private readonly RegisterService $registerService,
+        private readonly SerializerInterface $serializer,
+    ) {
+    }
+
     #[Route('/auth/register', methods: ['POST'])]
-    public function __invoke(
-        Request $request,
-        EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher
-    ): JsonResponse {
-        $data = json_decode($request->getContent(), true);
+    public function __invoke(Request $request): JsonResponse
+    {
+        /** @var RegisterRequestDto $dto */
+        $dto = $this->serializer->deserialize(
+            $request->getContent(),
+            RegisterRequestDto::class,
+            'json',
+            [
+                DateTimeNormalizer::FORMAT_KEY => 'Y-m-d',
+            ]
+        );
 
-        $user = new UserEntity();
-        $user->setEmail($data['email']);
-        $user->setRoles(['ROLE_USER']);
-        $user->setPassword($hasher->hashPassword($user, $data['password']));
+        $this->registerService->register($dto);
 
-        $em->persist($user);
-        $em->flush();
-
-        return new JsonResponse(['status' => 'ok'], 201);
+        return new JsonResponse(['status' => 'ok'], Response::HTTP_CREATED);
     }
 }

@@ -15,8 +15,10 @@
         "symfony/dotenv": "8.0.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "8.0.*",
+        "symfony/property-access": "8.0.*",
         "symfony/runtime": "8.0.*",
         "symfony/security-core": "^8.0.3",
+        "symfony/serializer": "8.0.*",
         "symfony/yaml": "8.0.*"
     },
     "config": {

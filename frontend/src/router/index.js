@@ -1,46 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Login from '../pages/Login.vue'
 import Home from '../pages/Home.vue'
-import Dashboard from '../pages/Dashboard.vue'
 import { hasToken } from '@/api'
+import { ROUTES, ROUTE_NAMES } from '@/constants/routes'
 
 const routes = [
-    { 
-        path: '/', 
-        component: Home,
-        meta: { requiresAuth: false }
-    },
-    { 
-        path: '/dashboard', 
-        component: Dashboard,
-        meta: { requiresAuth: true }
-    },
+  {
+    path: ROUTES.LOGIN,
+    name: ROUTE_NAMES.LOGIN,
+    component: Login,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: ROUTES.HOME,
+    name: ROUTE_NAMES.HOME,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.USER,
+    name: ROUTE_NAMES.USER,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 })
 
-// Защита маршрутов, требующих авторизации
 router.beforeEach((to, from, next) => {
-    const token = hasToken()
-    
-    console.log('Router guard:', { 
-        to: to.path, 
-        from: from.path, 
-        requiresAuth: to.meta.requiresAuth, 
-        hasToken: token 
-    })
-    
-    // Если пытаемся зайти на защищенный маршрут без токена
-    if (to.meta.requiresAuth && !token) {
-        console.log('Доступ запрещен: нет токена, редирект на /')
-        next('/')
-        return
-    }
-    
-    console.log('Доступ разрешен, переход на:', to.path)
-    next()
+  const token = hasToken()
+
+  if (to.meta.requiresAuth && !token) {
+    next(ROUTES.LOGIN)
+    return
+  }
+
+  next()
 })
 
 export default router
