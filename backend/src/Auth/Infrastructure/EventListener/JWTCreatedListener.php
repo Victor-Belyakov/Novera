@@ -23,6 +23,7 @@ final class JWTCreatedListener
             'id' => $user->getId(),
             'username' => $user->getEmail(),
             'email' => $user->getEmail(),
+            'phone' => $user->getPhone() ?? '',
             'roles' => $user->getRoles(),
             'iat' => time(),
             'exp' => time() + 900,

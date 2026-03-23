@@ -9,14 +9,14 @@
     <div class="flex items-center gap-4">
       <button
         @click="handleProfileClick"
-        class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer flex items-center justify-center text-white font-semibold text-lg"
+        class="w-10 h-10 rounded-full bg-white/25 hover:bg-white/40 transition-colors cursor-pointer flex items-center justify-center text-white font-semibold text-lg"
         :title="userEmail || 'Профиль'"
       >
         {{ getInitials() }}
       </button>
       <button
         @click="handleLogout"
-        class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer flex items-center justify-center text-white"
+        class="w-10 h-10 rounded-full bg-white/25 hover:bg-white/40 transition-colors cursor-pointer flex items-center justify-center text-white"
         title="Выход"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">

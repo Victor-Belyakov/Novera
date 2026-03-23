@@ -10,6 +10,31 @@ user_controllers:
     type: attribute
     prefix: /api
 
+task_controllers:
+    resource: '../src/Task/Controller/'
+    type: attribute
+    prefix: /api
+
+category_controllers:
+    resource: '../src/Category/Controller/'
+    type: attribute
+    prefix: /api
+
+goal_controllers:
+    resource: '../src/Goal/Controller/'
+    type: attribute
+    prefix: /api
+
+habit_controllers:
+    resource: '../src/Habit/Controller/'
+    type: attribute
+    prefix: /api
+
+reminder_controllers:
+    resource: '../src/Reminder/Controller/'
+    type: attribute
+    prefix: /api
+
 # Явно добавляем login_check для firewall json_login
 login_check:
     path: /api/auth/login

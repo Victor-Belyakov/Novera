@@ -16,17 +16,17 @@
           <p class="text-blue-100 text-lg">{{ user.email }}</p>
         </div>
 
-        <div v-else-if="loading" class="text-white">
-          <div class="h-8 w-48 bg-white/20 rounded animate-pulse mb-2"></div>
-          <div class="h-5 w-64 bg-white/20 rounded animate-pulse"></div>
+        <div v-else-if="loading" class="text-white flex items-center gap-3">
+          <AppSpinner size="sm" />
+          <span class="text-blue-100">Загрузка...</span>
         </div>
       </div>
     </div>
 
     <!-- Контент -->
     <div class="p-8">
-      <div v-if="loading" class="space-y-4">
-        <div v-for="i in 5" :key="i" class="h-16 bg-gray-100 rounded-lg animate-pulse"></div>
+      <div v-if="loading" class="flex justify-center py-12">
+        <AppSpinner block label="Загрузка профиля..." />
       </div>
 
       <div v-else-if="error" class="text-center py-8">
@@ -40,55 +40,160 @@
         </button>
       </div>
 
-      <div v-else-if="user" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- ID -->
-        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">ID</div>
-          <div class="text-xl font-semibold text-gray-900">{{ user.id }}</div>
+      <div v-else-if="user">
+        <!-- Кнопка Редактировать / Сохранить и Отмена -->
+        <div class="flex gap-3 mb-6">
+          <button
+            v-if="!isEditing"
+            @click="startEditing"
+            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-medium cursor-pointer"
+          >
+            Редактировать
+          </button>
+          <template v-else>
+            <button
+              @click="saveProfile"
+              :disabled="saving"
+              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-medium disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            >
+              {{ saving ? 'Сохранение...' : 'Сохранить' }}
+            </button>
+            <button
+              @click="cancelEditing"
+              :disabled="saving"
+              class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors font-medium disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            >
+              Отмена
+            </button>
+          </template>
         </div>
 
-        <!-- Email -->
-        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">Email</div>
-          <div class="text-xl font-semibold text-gray-900 break-all">{{ user.email }}</div>
+        <!-- Режим просмотра -->
+        <div v-if="!isEditing" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">ID</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.id }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Email</div>
+            <div class="text-xl font-semibold text-gray-900 break-all">{{ user.email }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Имя</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.name }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Фамилия</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.last_name }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Отчество</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.middle_name || '—' }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Дата рождения</div>
+            <div class="text-xl font-semibold text-gray-900">{{ formatDate(user.date_of_birth) }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Телефон</div>
+            <div class="text-xl font-semibold text-gray-900">{{ formatPhoneMask(user.phone) || '—' }}</div>
+          </div>
+          <div v-if="user.telegram_id" class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Telegram ID</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.telegram_id }}</div>
+          </div>
         </div>
 
-        <!-- Имя -->
-        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">Имя</div>
-          <div class="text-xl font-semibold text-gray-900">{{ user.name }}</div>
-        </div>
-
-        <!-- Фамилия -->
-        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">Фамилия</div>
-          <div class="text-xl font-semibold text-gray-900">{{ user.last_name }}</div>
-        </div>
-
-        <!-- Отчество -->
-        <div v-if="user.middle_name" class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">Отчество</div>
-          <div class="text-xl font-semibold text-gray-900">{{ user.middle_name }}</div>
-        </div>
-
-        <!-- Дата рождения -->
-        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-          <div class="text-sm text-gray-500 font-medium mb-2">Дата рождения</div>
-          <div class="text-xl font-semibold text-gray-900">{{ formatDate(user.date_of_birth) }}</div>
-        </div>
+        <!-- Режим редактирования -->
+        <form v-else-if="editSnapshot" @submit.prevent="saveProfile" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">ID</label>
+            <div class="text-xl font-semibold text-gray-500">{{ user.id }}</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Email</label>
+            <input
+              v-model="editSnapshot.email"
+              type="email"
+              class="app-input"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Имя</label>
+            <input
+              v-model="editSnapshot.name"
+              type="text"
+              class="app-input"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Фамилия</label>
+            <input
+              v-model="editSnapshot.last_name"
+              type="text"
+              class="app-input"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Отчество</label>
+            <input
+              v-model="editSnapshot.middle_name"
+              type="text"
+              placeholder="Необязательно"
+              class="app-input"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Дата рождения</label>
+            <AppDatePicker
+              v-model="editSnapshot.date_of_birth"
+              :show-time="false"
+              placeholder="Выберите дату"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Телефон</label>
+            <input
+              :value="editSnapshot.phone"
+              @input="onPhoneInput"
+              type="tel"
+              placeholder="+7 (999) 123-45-67"
+              class="app-input"
+            />
+          </div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Telegram ID</label>
+            <input
+              v-model="editSnapshot.telegram_id"
+              type="text"
+              placeholder="Необязательно"
+              class="app-input"
+            />
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { apiGet, handleResponse } from '@/api'
+import { ref, onMounted, reactive } from 'vue'
+import { apiGet, apiPatch, handleResponse } from '@/api'
 import { API_ENDPOINTS } from '@/constants/api'
+import { useNotifications } from '@/composables/useNotifications'
+import AppDatePicker from '@/components/AppDatePicker.vue'
+import AppSpinner from '@/components/AppSpinner.vue'
+
+const { success: showSuccess, error: showError } = useNotifications()
 
 const user = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const isEditing = ref(false)
+const saving = ref(false)
+
+/** Снимок данных для формы редактирования — создаётся при входе в режим редактирования */
+const editSnapshot = ref(null)
 
 const loadUserData = async () => {
   try {
@@ -104,6 +209,71 @@ const loadUserData = async () => {
     console.error('Error loading user data:', err)
   } finally {
     loading.value = false
+  }
+}
+
+const formatPhoneMask = (val) => {
+  let digits = (val || '').replace(/\D/g, '')
+  if (digits.startsWith('8')) digits = '7' + digits.slice(1)
+  if (digits && !digits.startsWith('7')) digits = '7' + digits
+  digits = digits.slice(0, 11)
+  if (!digits) return ''
+  let s = '+7'
+  if (digits.length > 1) s += ' (' + digits.slice(1, 4)
+  if (digits.length >= 4) s += ') ' + digits.slice(4, 7)
+  if (digits.length >= 7) s += '-' + digits.slice(7, 9)
+  if (digits.length >= 9) s += '-' + digits.slice(9, 11)
+  return s
+}
+
+const onPhoneInput = (e) => {
+  if (!editSnapshot.value) return
+  editSnapshot.value.phone = formatPhoneMask(e.target.value)
+}
+
+const startEditing = () => {
+  if (!user.value) return
+  const u = user.value
+  editSnapshot.value = reactive({
+    email: u.email ?? '',
+    phone: formatPhoneMask(u.phone ?? ''),
+    name: u.name ?? '',
+    last_name: u.last_name ?? '',
+    middle_name: u.middle_name ?? '',
+    date_of_birth: u.date_of_birth ?? '',
+    telegram_id: u.telegram_id ?? '',
+  })
+  isEditing.value = true
+}
+
+const cancelEditing = () => {
+  isEditing.value = false
+  editSnapshot.value = null
+}
+
+const saveProfile = async () => {
+  if (!user.value || !editSnapshot.value || saving.value) return
+  try {
+    saving.value = true
+    const response = await apiPatch(API_ENDPOINTS.USER.GET_CURRENT, {
+      email: editSnapshot.value.email,
+      phone: (editSnapshot.value.phone || '').replace(/\D/g, '') || null,
+      name: editSnapshot.value.name,
+      last_name: editSnapshot.value.last_name,
+      middle_name: editSnapshot.value.middle_name || null,
+      date_of_birth: editSnapshot.value.date_of_birth,
+      telegram_id: editSnapshot.value.telegram_id?.trim() || null,
+    })
+    const data = await handleResponse(response)
+    user.value = data
+    isEditing.value = false
+    editSnapshot.value = null
+    showSuccess('Профиль сохранён')
+  } catch (err) {
+    showError(err.message || 'Ошибка при сохранении')
+    console.error('Error saving profile:', err)
+  } finally {
+    saving.value = false
   }
 }
 

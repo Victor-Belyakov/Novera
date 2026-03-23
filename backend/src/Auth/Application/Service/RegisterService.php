@@ -24,6 +24,7 @@ final readonly class RegisterService
         $user->setMiddleName($dto->middle_name);
         $user->setLastName($dto->last_name);
         $user->setDateOfBirth($dto->date_birth);
+        $user->setPhone($dto->phone);
         $user->setPassword($this->hasher->hashPassword($user, $dto->password));
 
         $this->userRepository->save($user);
@@ -31,5 +32,6 @@ final readonly class RegisterService
         return $user;
     }
 }
+
 
 

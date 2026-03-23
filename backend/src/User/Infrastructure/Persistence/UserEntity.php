@@ -2,6 +2,7 @@
 
 namespace App\User\Infrastructure\Persistence;
 
+use App\Infrastructure\Persistence\Trait\TimestampableTrait;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,8 +12,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
 #[ORM\UniqueConstraint(name: 'uniq_user_email', columns: ['email'])]
+#[ORM\HasLifecycleCallbacks]
 class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -20,6 +24,12 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $email;
+
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    private ?string $telegramId = null;
 
     #[ORM\Column(type: 'json')]
     public array $roles = [];
@@ -62,6 +72,35 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = mb_strtolower($email);
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string|null $phone
+     * @return $this
+     */
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone === null || $phone === '' ? null : preg_replace('/\D/', '', $phone);
+        return $this;
+    }
+
+    public function getTelegramId(): ?string
+    {
+        return $this->telegramId;
+    }
+
+    public function setTelegramId(?string $telegramId): self
+    {
+        $this->telegramId = $telegramId === null || $telegramId === '' ? null : $telegramId;
         return $this;
     }
 
@@ -188,12 +227,12 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getFullName(): string
     {
-        return sprintf(
+        return trim(sprintf(
             '%s %s %s',
-            $user->last_name,
-            $user->first_name,
-            $user->middle_name
-        );
+            $this->last_name,
+            $this->name,
+            $this->middle_name ?? ''
+        ));
     }
 
     /**

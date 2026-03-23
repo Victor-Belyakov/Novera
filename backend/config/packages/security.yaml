@@ -26,6 +26,11 @@ security:
             stateless: true
             security: false
 
+        refresh:
+            pattern: ^/api/auth/refresh
+            stateless: true
+            security: false
+
         api:
             pattern: ^/api
             stateless: true
@@ -34,6 +39,7 @@ security:
     access_control:
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
     role_hierarchy:

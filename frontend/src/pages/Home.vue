@@ -4,10 +4,9 @@
 
     <div class="flex flex-1 overflow-hidden">
       <AppSidebar
-        :active-menu="activeMenu"
         :is-collapsed="isCollapsed"
         :menu-items="menuItems"
-        @update-active="activeMenu = $event"
+        @update-active="onMenuActive"
         @toggle-collapse="isCollapsed = !isCollapsed"
       />
 
@@ -27,43 +26,71 @@ import AppNavbar from '@/components/AppNavbar.vue'
 import HomeContent from './Home/HomeContent.vue'
 import UserContent from './Home/UserContent.vue'
 import SettingsContent from './Home/SettingsContent.vue'
+import UsersContent from './Home/UsersContent.vue'
+import TasksContent from './Home/TasksContent.vue'
+import GoalsContent from './Home/GoalsContent.vue'
+import HabitsContent from './Home/HabitsContent.vue'
+import CategoriesContent from './Home/CategoriesContent.vue'
+import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
 import { MENU_ITEMS } from '@/constants/menu'
 import { ROUTES } from '@/constants/routes'
 
 const route = useRoute()
+const router = useRouter()
 
-const activeMenu = ref('home')
 const isCollapsed = ref(false)
 
-// Функция для сброса activeMenu (предоставляется дочерним компонентам)
+const pathToMenu = {
+  [ROUTES.HOME]: 'home',
+  [ROUTES.USER]: 'profile',
+  [ROUTES.USERS]: 'users',
+  [ROUTES.TASKS]: 'tasks',
+  [ROUTES.GOALS]: 'goals',
+  [ROUTES.HABITS]: 'habits',
+  [ROUTES.SETTINGS_CATEGORIES]: 'settings-categories',
+  [ROUTES.SETTINGS]: 'settings',
+}
+const activeMenu = computed(() => pathToMenu[route.path] ?? 'home')
+
 const resetActiveMenu = (menu = 'home') => {
-  activeMenu.value = menu
+  const path = Object.entries(pathToMenu).find(([, m]) => m === menu)?.[0] ?? ROUTES.HOME
+  if (route.path !== path) router.push(path)
 }
 
-// Предоставляем функцию дочерним компонентам
 provide('resetActiveMenu', resetActiveMenu)
 
-// Отслеживаем изменения роута и обновляем activeMenu
-watch(
-  () => route.path,
-  (newPath) => {
-    if (newPath === ROUTES.HOME) {
-      activeMenu.value = 'home'
-    } else if (newPath === ROUTES.USER) {
-      activeMenu.value = 'profile'
-    }
-  },
-  { immediate: true }
-)
-
 const menuItems = MENU_ITEMS
+
+function onMenuActive(menuName) {
+  let path = null
+  const parent = menuItems.find((m) => m.name === menuName)
+  if (parent?.path) {
+    path = parent.path
+  } else {
+    for (const p of menuItems) {
+      const child = p.children?.find((c) => c.name === menuName)
+      if (child?.path) {
+        path = child.path
+        break
+      }
+    }
+  }
+  if (path && route.path !== path) {
+    router.push(path)
+  }
+}
 
 // Маппинг компонентов для динамической загрузки
 const components = {
   home: HomeContent,
   profile: UserContent,
+  users: UsersContent,
+  tasks: TasksContent,
+  goals: GoalsContent,
+  habits: HabitsContent,
   settings: SettingsContent,
+  'settings-categories': CategoriesContent,
 }
 
 // Текущий компонент на основе activeMenu
@@ -80,7 +107,12 @@ const pageTitle = computed(() => {
   const titles = {
     home: 'Главная',
     profile: 'Пользователь',
+    users: 'Пользователи',
+    tasks: 'Задачи',
+    goals: 'Цели',
+    habits: 'Привычки',
     settings: 'Настройки',
+    'settings-categories': 'Категории',
   }
   return titles[activeMenu.value] || 'Главная'
 })

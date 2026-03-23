@@ -76,7 +76,9 @@ export const refreshAccessToken = async () => {
   isRefreshing = true
   refreshPromise = (async () => {
     try {
-      const response = await fetch(`${API_URL}${API_ENDPOINTS.AUTH.REFRESH}`, {
+      // Если API_URL пустой, используем относительный путь (для прокси в dev режиме)
+      const refreshUrl = API_URL ? `${API_URL}${API_ENDPOINTS.AUTH.REFRESH}` : API_ENDPOINTS.AUTH.REFRESH
+      const response = await fetch(refreshUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,9 +92,16 @@ export const refreshAccessToken = async () => {
         throw new Error('Failed to refresh token')
       }
 
-      const data = await response.json()
+      const text = await response.text()
+      let data
+      try {
+        data = text ? JSON.parse(text) : null
+      } catch {
+        console.error('Refresh: сервер вернул не JSON. Возможна ошибка на бэкенде.')
+        throw new Error('Refresh token failed: invalid response')
+      }
 
-      if (data.token) {
+      if (data?.token) {
         setToken(data.token)
         if (data.refresh_token) {
           setRefreshToken(data.refresh_token)
@@ -138,7 +147,9 @@ export const apiRequest = async (endpoint, options = {}, retry = true) => {
   }
 
   // Выполняем запрос
-  const response = await fetch(`${API_URL}${endpoint}`, {
+  // Если API_URL пустой, используем относительный путь (для прокси в dev режиме)
+  const url = API_URL ? `${API_URL}${endpoint}` : endpoint
+  const response = await fetch(url, {
     ...options,
     headers,
   })
@@ -255,6 +266,22 @@ export const handleResponse = async (response) => {
     return null
   }
 
-  return response.json()
+  const text = await response.text()
+  if (!text || !text.trim()) {
+    return null
+  }
+  const contentType = response.headers.get('content-type') || ''
+  if (!contentType.includes('application/json')) {
+    throw new Error(
+      `Сервер вернул не JSON (${response.status}). Возможна ошибка на бэкенде. Проверьте консоль сервера.`
+    )
+  }
+  try {
+    return JSON.parse(text)
+  } catch {
+    throw new Error(
+      'Сервер вернул некорректный ответ (не JSON). Возможна ошибка PHP или отображение ошибок на бэкенде.'
+    )
+  }
 }
 

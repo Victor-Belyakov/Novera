@@ -17,6 +17,7 @@ final readonly class RegisterRequestDto
         public ?string $middle_name = null,
         #[SerializedName('date_birth')]
         public ?DateTimeImmutable $date_birth = null,
+        public ?string $phone = null,
     ) {
     }
 }

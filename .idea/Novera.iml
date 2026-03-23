@@ -70,6 +70,10 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/var-exporter" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-intl-idn" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

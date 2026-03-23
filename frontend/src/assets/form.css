@@ -1,0 +1,234 @@
+/**
+ * Глобальные стили для полей ввода и селектов.
+ * Классы: .app-input, .app-select
+ * Использовать по всей системе для единого вида форм.
+ */
+
+:root {
+  --app-input-bg: #f9fafb;
+  --app-input-bg-focus: #ffffff;
+  --app-input-border: #e5e7eb;
+  --app-input-border-focus: #172554; /* blue-950 */
+  --app-input-ring: rgba(23, 37, 84, 0.25);
+  --app-input-text: #111827;
+  --app-input-placeholder: #9ca3af;
+  --app-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+}
+
+.app-input,
+.app-select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--app-input-text);
+  background-color: var(--app-input-bg);
+  border: 1px solid var(--app-input-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.app-input::placeholder {
+  color: var(--app-input-placeholder);
+}
+
+.app-input:hover,
+.app-select:hover {
+  border-color: #d1d5db;
+}
+
+.app-input:focus,
+.app-select:focus {
+  outline: none;
+  border-color: var(--app-input-border-focus);
+  background-color: var(--app-input-bg-focus);
+  box-shadow: 0 0 0 3px var(--app-input-ring);
+}
+
+.app-input:disabled,
+.app-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Специфика для select: стрелка и курсор */
+.app-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+  background-image: var(--app-select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 1.25rem;
+}
+
+.app-select option {
+  padding: 0.5rem;
+  color: var(--app-input-text);
+  background: #fff;
+}
+
+/* Textarea с тем же стилем */
+textarea.app-input {
+  resize: vertical;
+  min-height: 2.5rem;
+}
+
+/* Для полей в модалках/карточках можно оставить компактный вариант */
+.app-input-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.app-label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Обязательное поле: красная звёздочка после подписи */
+.app-label--required::after {
+  content: ' *';
+  color: #dc2626;
+}
+
+/* ——— Поля выбора даты (календарь) ——— */
+:root {
+  --app-date-bg: #ffffff;
+  --app-date-border: #e5e7eb;
+  --app-date-border-hover: #d1d5db;
+  --app-date-border-focus: #172554;
+  --app-date-icon: #6b7280;
+  --app-date-icon-hover: #374151;
+}
+
+.app-input-date,
+input[type="date"].app-input {
+  color-scheme: light;
+  min-height: 2.5rem;
+  padding-right: 2.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.app-input-date::-webkit-datetime-edit,
+input[type="date"].app-input::-webkit-datetime-edit {
+  padding: 0;
+  padding-left: 1px;
+}
+
+.app-input-date::-webkit-datetime-edit-fields-wrapper,
+input[type="date"].app-input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.app-input-date::-webkit-datetime-edit-text,
+input[type="date"].app-input::-webkit-datetime-edit-text {
+  color: #9ca3af;
+  padding: 0 0.15em;
+}
+
+.app-input-date::-webkit-calendar-picker-indicator,
+input[type="date"].app-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.75;
+  padding: 0.35rem;
+  margin-left: 0.25rem;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.app-input-date:hover::-webkit-calendar-picker-indicator,
+input[type="date"].app-input:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  background-color: rgba(23, 37, 84, 0.06);
+}
+
+.app-input-date:focus::-webkit-calendar-picker-indicator,
+input[type="date"].app-input:focus::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  background-color: rgba(23, 37, 84, 0.08);
+}
+
+/* Firefox: скрыть стрелку по умолчанию и выровнять */
+@supports (-moz-appearance: none) {
+  .app-input-date,
+  input[type="date"].app-input {
+    padding-right: 1rem;
+  }
+}
+
+/* Компактные даты в одну линию с кнопкой (фильтр) */
+.app-input-date-inline {
+  color-scheme: light;
+  height: 2.25rem;
+  min-width: 8.5rem;
+  padding: 0 2rem 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+  color: var(--app-input-text);
+  background: var(--app-date-bg);
+  border: 1px solid var(--app-date-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.app-input-date-inline:hover {
+  border-color: var(--app-date-border-hover);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+}
+
+.app-input-date-inline:focus {
+  outline: none;
+  border-color: var(--app-date-border-focus);
+  box-shadow: 0 0 0 2px var(--app-input-ring);
+}
+
+.app-input-date-inline::-webkit-datetime-edit {
+  padding: 0;
+}
+
+.app-input-date-inline::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.app-input-date-inline::-webkit-datetime-edit-text {
+  color: #9ca3af;
+  padding: 0 0.1em;
+}
+
+.app-input-date-inline::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0.25rem;
+  margin-left: 0;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.app-input-date-inline:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  background-color: rgba(23, 37, 84, 0.06);
+}
+
+.app-input-date-inline:focus::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  background-color: rgba(23, 37, 84, 0.08);
+}
+
+/* Активный пункт левого меню — гарантированная подсветка */
+aside nav button.sidebar-item--active,
+aside nav .sidebar-item--active {
+  background-color: #ffffff !important;
+  color: #172554 !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}

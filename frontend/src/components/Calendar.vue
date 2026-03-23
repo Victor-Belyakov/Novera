@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-lg p-6 h-full flex flex-col w-full">
+  <div class="bg-white rounded-lg shadow-lg p-6 h-full flex flex-col w-full min-h-0">
     <div class="flex items-center justify-between mb-4 flex-shrink-0">
       <h3 class="text-xl font-semibold text-gray-900">{{ currentMonthYear }}</h3>
       <div class="flex gap-2">
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-7 gap-2 flex-1">
+    <div class="grid grid-cols-7 gap-2 flex-1 min-h-0 auto-rows-fr">
       <!-- Дни недели -->
       <div
         v-for="day in weekDays"
@@ -47,19 +47,30 @@
         :key="`empty-${n}`"
       ></div>
 
-      <!-- Дни месяца -->
+      <!-- Дни месяца с задачами -->
       <div
         v-for="day in daysInMonth"
         :key="day"
         @click="selectDate(day)"
         :class="[
-          'flex items-center justify-center rounded-md cursor-pointer transition-colors text-lg font-medium',
-          isToday(day) ? 'bg-blue-950 text-white font-semibold' : '',
-          isSelected(day) ? 'bg-blue-100 text-blue-950 font-semibold' : '',
+          'flex flex-col rounded-md cursor-pointer transition-colors overflow-hidden min-h-[4rem]',
+          isToday(day) ? 'bg-blue-950 text-white' : '',
+          isSelected(day) && !isToday(day) ? 'bg-blue-100 text-blue-950' : '',
           !isToday(day) && !isSelected(day) ? 'hover:bg-gray-100 text-gray-900' : '',
         ]"
       >
-        {{ day }}
+        <span class="text-lg font-medium p-1 shrink-0">{{ day }}</span>
+        <div class="flex-1 min-h-0 overflow-y-auto px-1 pb-1 space-y-0.5">
+          <div
+            v-for="task in getTasksForDay(day)"
+            :key="task.id"
+            class="text-xs truncate rounded px-1 py-0.5"
+            :class="isToday(day) ? 'bg-white/20 text-white' : 'bg-blue-950 text-blue-100'"
+            :title="task.title"
+          >
+            {{ task.title }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -67,6 +78,10 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+
+const props = defineProps({
+  tasks: { type: Array, default: () => [] },
+})
 
 const currentDate = ref(new Date())
 const selectedDate = ref(new Date())
@@ -113,6 +128,19 @@ const isSelected = (day) => {
     currentDate.value.getMonth() === selectedDate.value.getMonth() &&
     currentDate.value.getFullYear() === selectedDate.value.getFullYear()
   )
+}
+
+function dateKey(year, month, day) {
+  const m = String(month + 1).padStart(2, '0')
+  const d = String(day).padStart(2, '0')
+  return `${year}-${m}-${d}`
+}
+
+function getTasksForDay(day) {
+  const year = currentDate.value.getFullYear()
+  const month = currentDate.value.getMonth()
+  const key = dateKey(year, month, day)
+  return (props.tasks || []).filter((t) => t.due_date === key)
 }
 
 const selectDate = (day) => {

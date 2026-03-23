@@ -3,8 +3,8 @@
     class="flex items-center gap-3 w-full p-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer"
     :class="[
       isActive
-        ? 'bg-white text-blue-950'
-        : 'text-gray-100 hover:bg-white hover:text-blue-950',
+        ? 'sidebar-item--active bg-white text-blue-950 shadow-sm ring-1 ring-blue-950/10'
+        : 'text-white/90 hover:bg-white hover:text-blue-950',
     ]"
     :title="isCollapsed ? label : ''"
     @click="$emit('click')"
@@ -41,6 +41,7 @@ const iconComponent = computed(() => getIconComponent(props.icon))
 
 defineEmits(['click'])
 </script>
+
 
 
 

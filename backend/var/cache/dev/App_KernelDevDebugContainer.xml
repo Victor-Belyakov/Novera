@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.project_dir">/var/www/html</parameter>
+    <parameter key="kernel.project_dir">/home/victor/Документы/Projects/Novera/backend</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.runtime_mode">%env(query_string:default:container.runtime_mode:APP_RUNTIME_MODE)%</parameter>
@@ -9,9 +9,9 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">/var/www/html/var/cache/dev</parameter>
-    <parameter key="kernel.cache_dir">/var/www/html/var/cache/dev</parameter>
-    <parameter key="kernel.logs_dir">/var/www/html/var/log</parameter>
+    <parameter key="kernel.build_dir">/home/victor/Документы/Projects/Novera/backend/var/cache/dev</parameter>
+    <parameter key="kernel.cache_dir">/home/victor/Документы/Projects/Novera/backend/var/cache/dev</parameter>
+    <parameter key="kernel.logs_dir">/home/victor/Документы/Projects/Novera/backend/var/log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</parameter>
@@ -22,39 +22,39 @@
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/symfony/framework-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/symfony/framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="SecurityBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/symfony/security-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/symfony/security-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\SecurityBundle</parameter>
       </parameter>
       <parameter key="LexikJWTAuthenticationBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/lexik/jwt-authentication-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/lexik/jwt-authentication-bundle</parameter>
         <parameter key="namespace">Lexik\Bundle\JWTAuthenticationBundle</parameter>
       </parameter>
       <parameter key="DoctrineBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/doctrine/doctrine-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/doctrine/doctrine-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
       </parameter>
       <parameter key="DoctrineMigrationsBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/doctrine/doctrine-migrations-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/doctrine/doctrine-migrations-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
       </parameter>
       <parameter key="MakerBundle" type="collection">
-        <parameter key="path">/var/www/html/vendor/symfony/maker-bundle</parameter>
+        <parameter key="path">/home/victor/Документы/Projects/Novera/backend/vendor/symfony/maker-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
-    <parameter key="kernel.share_dir">/var/www/html/var/cache/dev</parameter>
+    <parameter key="kernel.share_dir">/home/victor/Документы/Projects/Novera/backend/var/cache/dev</parameter>
     <parameter key=".container.known_envs" type="collection">
       <parameter>dev</parameter>
       <parameter>test</parameter>
       <parameter>prod</parameter>
     </parameter>
-    <parameter key=".kernel.config_dir">/var/www/html/config</parameter>
+    <parameter key=".kernel.config_dir">/home/victor/Документы/Projects/Novera/backend/config</parameter>
     <parameter key=".kernel.bundles_definition" type="collection">
       <parameter key="Symfony\Bundle\FrameworkBundle\FrameworkBundle" type="collection">
         <parameter key="all">true</parameter>
@@ -107,17 +107,17 @@
     <parameter key="kernel.trusted_headers">%env(default::SYMFONY_TRUSTED_HEADERS)%</parameter>
     <parameter key="debug.file_link_format">%env(default::SYMFONY_IDE)%</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">/var/www/html/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">/home/victor/Документы/Projects/Novera/backend/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"/>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
-    <parameter key="router.cache_dir">/var/www/html/var/cache/dev</parameter>
+    <parameter key="router.cache_dir">/home/victor/Документы/Projects/Novera/backend/var/cache/dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="serializer.mapping.cache.file">/var/www/html/var/cache/dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.file">/home/victor/Документы/Projects/Novera/backend/var/cache/dev/serialization.php</parameter>
     <parameter key=".serializer.named_serializers" type="collection"/>
-    <parameter key="cache.prefix.seed">_/var/www/html.App_KernelDevDebugContainer</parameter>
+    <parameter key="cache.prefix.seed">_/home/victor/Документы/Projects/Novera/backend.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
       <parameter key="cache_limiter" type="string">0</parameter>
@@ -140,6 +140,7 @@
     <parameter key="security.firewalls" type="collection">
       <parameter>login</parameter>
       <parameter>register</parameter>
+      <parameter>refresh</parameter>
       <parameter>api</parameter>
     </parameter>
     <parameter key="security.logout_uris" type="collection"/>
@@ -221,9 +222,231 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Category\Application\DTO\CategoryCreateRequestDto" class="App\Category\Application\DTO\CategoryCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Category\Application\DTO\CategoryCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Category\Application\DTO\CategoryResponseDto" class="App\Category\Application\DTO\CategoryResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Category\Application\DTO\CategoryResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Category\Application\Service\CategoryService" class="App\Category\Application\Service\CategoryService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Category\Infrastructure\Repository\CategoryRepository"/>
+    </service>
+    <service id="App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Category\Application\Service\CategoryService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Category\Controller\CategoryController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Category\Domain\Repository\CategoryRepositoryInterface" class="App\Category\Domain\Repository\CategoryRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Category\Domain\Service\CategoryServiceInterface" class="App\Category\Domain\Service\CategoryServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Category\Infrastructure\Persistence\CategoryEntity" class="App\Category\Infrastructure\Persistence\CategoryEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Category\Infrastructure\Repository\CategoryRepository" class="App\Category\Infrastructure\Repository\CategoryRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Goal\Application\DTO\GoalCreateRequestDto" class="App\Goal\Application\DTO\GoalCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Goal\Application\DTO\GoalCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Goal\Application\DTO\GoalResponseDto" class="App\Goal\Application\DTO\GoalResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Goal\Application\DTO\GoalResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Goal\Application\DTO\GoalUpdateRequestDto" class="App\Goal\Application\DTO\GoalUpdateRequestDto" autowire="true" autoconfigure="true"/>
+    <service id="App\Goal\Application\Service\GoalService" class="App\Goal\Application\Service\GoalService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Goal\Infrastructure\Repository\GoalRepository"/>
+      <argument type="service" id="App\Category\Infrastructure\Repository\CategoryRepository"/>
+    </service>
+    <service id="App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Goal\Application\Service\GoalService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Goal\Controller\GoalController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Goal\Domain\Repository\GoalRepositoryInterface" class="App\Goal\Domain\Repository\GoalRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Goal\Domain\Service\GoalServiceInterface" class="App\Goal\Domain\Service\GoalServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Goal\Infrastructure\Persistence\GoalEntity" class="App\Goal\Infrastructure\Persistence\GoalEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Goal\Infrastructure\Repository\GoalRepository" class="App\Goal\Infrastructure\Repository\GoalRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Habit\Application\Command\GenerateHabitLogsCommand" class="App\Habit\Application\Command\GenerateHabitLogsCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command" command="app:habits:generate-logs" description="Создать pending-логи для активных привычек на сегодня по их frequency" help=""/>
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setName">
+        <argument>app:habits:generate-logs</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Создать pending-логи для активных привычек на сегодня по их frequency</argument>
+      </call>
+    </service>
+    <service id="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" class="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command" command="app:habits:mark-skipped" description="Пометить просроченные pending-логи привычек как skipped" help=""/>
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setName">
+        <argument>app:habits:mark-skipped</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Пометить просроченные pending-логи привычек как skipped</argument>
+      </call>
+    </service>
+    <service id="App\Habit\Application\DTO\HabitCreateRequestDto" class="App\Habit\Application\DTO\HabitCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Habit\Application\DTO\HabitCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Habit\Application\DTO\HabitResponseDto" class="App\Habit\Application\DTO\HabitResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Habit\Application\DTO\HabitResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Habit\Application\Service\HabitService" class="App\Habit\Application\Service\HabitService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Habit\Infrastructure\Repository\HabitRepository"/>
+      <argument type="service" id="App\Category\Infrastructure\Repository\CategoryRepository"/>
+      <argument type="service" id="App\Goal\Infrastructure\Repository\GoalRepository"/>
+    </service>
+    <service id="App\Habit\Controller\HabitController" class="App\Habit\Controller\HabitController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Habit\Application\Service\HabitService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Habit\Controller\HabitController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Habit\Domain\Repository\HabitRepositoryInterface" class="App\Habit\Domain\Repository\HabitRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Habit\Domain\Service\HabitServiceInterface" class="App\Habit\Domain\Service\HabitServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Habit\Infrastructure\Persistence\HabitEntity" class="App\Habit\Infrastructure\Persistence\HabitEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Habit\Infrastructure\Persistence\HabitLogEntity" class="App\Habit\Infrastructure\Persistence\HabitLogEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Habit\Infrastructure\Repository\HabitRepository" class="App\Habit\Infrastructure\Repository\HabitRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command" command="app:reminders:send-due-emails" description="Отправить e-mail по всем активным напоминаниям, у которых наступило время (notify_at &lt;= now)" help=""/>
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="App\Reminder\Application\Service\ReminderDueEmailSender"/>
+      <call method="setName">
+        <argument>app:reminders:send-due-emails</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Отправить e-mail по всем активным напоминаниям, у которых наступило время (notify_at &lt;= now)</argument>
+      </call>
+    </service>
+    <service id="App\Reminder\Application\DTO\ReminderCreateRequestDto" class="App\Reminder\Application\DTO\ReminderCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Reminder\Application\DTO\ReminderCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Reminder\Application\DTO\ReminderResponseDto" class="App\Reminder\Application\DTO\ReminderResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Reminder\Application\DTO\ReminderResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Reminder\Application\DTO\ReminderUpdateRequestDto" class="App\Reminder\Application\DTO\ReminderUpdateRequestDto" autowire="true" autoconfigure="true"/>
+    <service id="App\Reminder\Application\Service\ReminderDueEmailSender" class="App\Reminder\Application\Service\ReminderDueEmailSender" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Reminder\Infrastructure\Repository\ReminderRepository"/>
+      <argument type="service" id="mailer.mailer"/>
+      <argument>%env(MAILER_FROM)%</argument>
+      <argument type="service" id="logger"/>
+    </service>
+    <service id="App\Reminder\Application\Service\ReminderService" class="App\Reminder\Application\Service\ReminderService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Reminder\Infrastructure\Repository\ReminderRepository"/>
+    </service>
+    <service id="App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Reminder\Application\Service\ReminderService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Reminder\Controller\ReminderController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Reminder\Domain\Repository\ReminderRepositoryInterface" class="App\Reminder\Domain\Repository\ReminderRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Reminder\Domain\Service\ReminderServiceInterface" class="App\Reminder\Domain\Service\ReminderServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Reminder\Infrastructure\Persistence\ReminderEntity" class="App\Reminder\Infrastructure\Persistence\ReminderEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Reminder\Infrastructure\Repository\ReminderRepository" class="App\Reminder\Infrastructure\Repository\ReminderRepository" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Task\Application\DTO\TaskCreateRequestDto" class="App\Task\Application\DTO\TaskCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Task\Application\DTO\TaskCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Task\Application\DTO\TaskResponseDto" class="App\Task\Application\DTO\TaskResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Task\Application\DTO\TaskResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Task\Application\DTO\TaskUpdateRequestDto" class="App\Task\Application\DTO\TaskUpdateRequestDto" autowire="true" autoconfigure="true"/>
+    <service id="App\Task\Application\Service\TaskService" class="App\Task\Application\Service\TaskService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Task\Infrastructure\Repository\TaskRepository"/>
+      <argument type="service" id="App\User\Infrastructure\Repository\UserRepository"/>
+      <argument type="service" id="App\Goal\Infrastructure\Repository\GoalRepository"/>
+    </service>
+    <service id="App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Task\Application\Service\TaskService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Task\Controller\TaskController"/>
+      </call>
+    </service>
+    <service id="App\Task\Domain\Enum\TaskStatusEnum" class="App\Task\Domain\Enum\TaskStatusEnum" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's an enum"/>
+    </service>
+    <service id=".abstract.App\Task\Domain\Repository\TaskRepositoryInterface" class="App\Task\Domain\Repository\TaskRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Task\Domain\Service\TaskServiceInterface" class="App\Task\Domain\Service\TaskServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Task\Infrastructure\Persistence\TaskEntity" class="App\Task\Infrastructure\Persistence\TaskEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\User\Application\DTO\UserListDto" class="App\User\Application\DTO\UserListDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\User\Application\DTO\UserListDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
     <service id="App\User\Application\DTO\UserResponseDto" class="App\User\Application\DTO\UserResponseDto" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\User\Application\DTO\UserResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
     </service>
+    <service id="App\User\Application\DTO\UserUpdateRequestDto" class="App\User\Application\DTO\UserUpdateRequestDto" autowire="true" autoconfigure="true"/>
     <service id="App\User\Application\Service\UserService" class="App\User\Application\Service\UserService" autowire="true" autoconfigure="true">
       <argument type="service" id="App\User\Infrastructure\Repository\UserRepository"/>
     </service>
@@ -232,6 +455,7 @@
       <tag name="routing.controller"/>
       <tag name="container.service_subscriber"/>
       <argument type="service" id="App\User\Application\Service\UserService"/>
+      <argument type="service" id="serializer"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.TJNRSaV.App\User\Controller\UserController"/>
       </call>
@@ -278,7 +502,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" priority="-50">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.OyU6nkc"/>
+      <argument type="service" id=".service_locator.9ye1zQh"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" priority="-100">controller.argument_value_resolver</tag>
@@ -372,7 +596,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>/var/www/html/var/cache/dev/http_cache</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -382,7 +606,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>/var/www/html/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -417,6 +641,7 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
+        <argument key="mailer.message_logger_listener" type="service" id="mailer.message_logger_listener" on-invalid="ignore_uninitialized"/>
         <argument key="debug.stopwatch" type="service" id="debug.stopwatch" on-invalid="ignore_uninitialized"/>
         <argument key="debug.event_dispatcher" type="service" id="debug.event_dispatcher" on-invalid="ignore_uninitialized"/>
         <argument key="session_listener" type="service" id="session_listener" on-invalid="ignore_uninitialized"/>
@@ -456,6 +681,9 @@
           <argument>reset</argument>
         </argument>
         <argument key="cache.property_info" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="mailer.message_logger_listener" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key="debug.stopwatch" type="collection">
@@ -589,7 +817,7 @@
       </argument>
       <argument>UTF-8</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -632,7 +860,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="filesystem"/>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <call method="setName">
         <argument>assets:install</argument>
       </call>
@@ -809,7 +1037,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument>dev</argument>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <call method="setName">
         <argument>debug:dotenv</argument>
       </call>
@@ -983,9 +1211,9 @@
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool" pruneable="true"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>yU+7Ob58gJ</argument>
+      <argument>cvlGep+S41</argument>
       <argument>0</argument>
-      <argument>/var/www/html/var/cache/dev/pools/app</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -998,40 +1226,40 @@
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>XUZWh3oCfH</argument>
+      <argument>ip4gxyx8FD</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>-ZPlc8xhwu</argument>
+      <argument>JEzNI3sNzx</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>8vUMbijCz2</argument>
+      <argument>FCV6PMoEp5</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>vHyQ8yH4Hf</argument>
+      <argument>XjISvKD-+d</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1041,7 +1269,7 @@
       <argument/>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1060,7 +1288,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument/>
       <argument>0</argument>
-      <argument>/var/www/html/var/cache/dev/pools/app</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -1173,6 +1401,78 @@
         <argument key="cache.doctrine.orm.default.result" type="service" id="cache.doctrine.orm.default.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.query" type="service" id="cache.doctrine.orm.default.query" on-invalid="ignore_uninitialized"/>
       </argument>
+    </service>
+    <service id="mailer.mailer" class="Symfony\Component\Mailer\Mailer">
+      <argument type="service" id="mailer.transports"/>
+      <argument>null</argument>
+      <argument type="service" id="debug.event_dispatcher" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transports" class="Symfony\Component\Mailer\Transport\Transports">
+      <argument type="collection">
+        <argument key="main">%env(MAILER_DSN)%</argument>
+      </argument>
+      <factory service="mailer.transport_factory" method="fromStrings"/>
+    </service>
+    <service id="mailer.transport_factory" class="Symfony\Component\Mailer\Transport">
+      <argument type="tagged_iterator" tag="mailer.transport_factory"/>
+    </service>
+    <service id="mailer.messenger.message_handler" class="Symfony\Component\Mailer\Messenger\MessageHandler">
+      <tag name="messenger.message_handler"/>
+      <argument type="service" id="mailer.transports"/>
+    </service>
+    <service id="mailer.envelope_listener" class="Symfony\Component\Mailer\EventListener\EnvelopeListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
+    </service>
+    <service id="mailer.message_logger_listener" class="Symfony\Component\Mailer\EventListener\MessageLoggerListener">
+      <tag name="kernel.reset" method="reset"/>
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="mailer.messenger_transport_listener" class="Symfony\Component\Mailer\EventListener\MessengerTransportListener">
+      <tag name="kernel.event_subscriber"/>
+    </service>
+    <service id="console.command.mailer_test" class="Symfony\Component\Mailer\Command\MailerTestCommand">
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="mailer.transports"/>
+      <call method="setName">
+        <argument>mailer:test</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Test Mailer transports by sending an email</argument>
+      </call>
+    </service>
+    <service id="mailer.transport_factory.abstract" class="Symfony\Component\Mailer\Transport\AbstractTransportFactory" abstract="true">
+      <tag name="monolog.logger" channel="mailer"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.native" class="Symfony\Component\Mailer\Transport\NativeTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>null</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.null" class="Symfony\Component\Mailer\Transport\NullTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>null</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.sendmail" class="Symfony\Component\Mailer\Transport\SendmailTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>null</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.smtp" class="Symfony\Component\Mailer\Transport\Smtp\EsmtpTransportFactory">
+      <tag name="mailer.transport_factory"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument>null</argument>
+      <argument type="service" id="logger" on-invalid="ignore"/>
     </service>
     <service id="debug.error_handler_configurator" class="Symfony\Component\HttpKernel\Debug\ErrorHandlerConfigurator" public="true">
       <tag name="monolog.logger" channel="php"/>
@@ -1392,6 +1692,30 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="mailer.envelope_listener"/>
+          <argument>onMessage</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="mailer.message_logger_listener"/>
+          <argument>onMessage</argument>
+        </argument>
+        <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="mailer.messenger_transport_listener"/>
+          <argument>onMessage</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service_closure" id="debug.debug_handlers_listener"/>
@@ -1565,7 +1889,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.OyU6nkc"/>
+      <argument type="service" id=".service_locator.9ye1zQh"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -1634,6 +1958,11 @@
         <argument>App\Auth\Controller\LogoutController</argument>
         <argument>App\Auth\Controller\RefreshTokenController</argument>
         <argument>App\Auth\Controller\RegisterController</argument>
+        <argument>App\Category\Controller\CategoryController</argument>
+        <argument>App\Goal\Controller\GoalController</argument>
+        <argument>App\Habit\Controller\HabitController</argument>
+        <argument>App\Reminder\Controller\ReminderController</argument>
+        <argument>App\Task\Controller\TaskController</argument>
         <argument>App\User\Controller\UserController</argument>
       </argument>
     </service>
@@ -1664,7 +1993,7 @@
       <argument type="service" id=".service_locator.TVmQFtt.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">/var/www/html/var/cache/dev</argument>
+        <argument key="cache_dir">/home/victor/Документы/Projects/Novera/backend/var/cache/dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -1707,7 +2036,7 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="logger" on-invalid="ignore"/>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -1734,7 +2063,7 @@
       <argument type="service" id="property_info.reflection_extractor" on-invalid="null"/>
     </service>
     <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
-      <argument>/var/www/html/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
       <argument type="service" id="secrets.decryption_key" on-invalid="ignore"/>
       <argument>APP_SECRET</argument>
     </service>
@@ -1747,7 +2076,7 @@
       <argument>base64:default::SYMFONY_DECRYPTION_SECRET</argument>
     </service>
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
-      <argument>/var/www/html/.env.%env(default:kernel.environment:APP_RUNTIME_ENV)%.local</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/.env.%env(default:kernel.environment:APP_RUNTIME_ENV)%.local</argument>
     </service>
     <service id="serializer" class="Symfony\Component\Serializer\Serializer">
       <argument type="collection">
@@ -1756,6 +2085,7 @@
         <argument type="service" id="serializer.normalizer.uid"/>
         <argument type="service" id="serializer.normalizer.datetime"/>
         <argument type="service" id="serializer.normalizer.constraint_violation_list"/>
+        <argument type="service" id="serializer.normalizer.mime_message"/>
         <argument type="service" id="serializer.normalizer.datetimezone"/>
         <argument type="service" id="serializer.normalizer.dateinterval"/>
         <argument type="service" id="serializer.normalizer.form_error"/>
@@ -1783,6 +2113,11 @@
       <argument type="collection"/>
       <argument type="service" id="serializer.name_converter.metadata_aware"/>
     </service>
+    <service id="serializer.normalizer.mime_message" class="Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer">
+      <tag name="serializer.normalizer" built_in="true" priority="-915"/>
+      <tag name="serializer.normalizer.default" priority="-915"/>
+      <argument type="service" id="serializer.normalizer.property"/>
+    </service>
     <service id="serializer.normalizer.datetimezone" class="Symfony\Component\Serializer\Normalizer\DateTimeZoneNormalizer">
       <tag name="serializer.normalizer" built_in="true" priority="-915"/>
       <tag name="serializer.normalizer.default" priority="-915"/>
@@ -1795,7 +2130,7 @@
     <service id="serializer.normalizer.data_uri" class="Symfony\Component\Serializer\Normalizer\DataUriNormalizer">
       <tag name="serializer.normalizer" built_in="true" priority="-920"/>
       <tag name="serializer.normalizer.default" priority="-920"/>
-      <argument>null</argument>
+      <argument type="service" id="mime_types" on-invalid="null"/>
     </service>
     <service id="serializer.normalizer.datetime" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer">
       <tag name="serializer.normalizer" built_in="true" priority="-910"/>
@@ -1871,10 +2206,10 @@
       <argument type="collection">
         <argument type="service" id="serializer.mapping.attribute_loader"/>
       </argument>
-      <argument>/var/www/html/var/cache/dev/serialization.php</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
-      <argument>/var/www/html/var/cache/dev/serialization.php</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/serialization.php</argument>
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -2054,7 +2389,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>/var/www/html/var/cache/dev/sessions</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -2103,6 +2438,11 @@
       <tag name="twig.runtime"/>
       <argument type="service" id="security.csrf.token_manager"/>
     </service>
+    <service id="mime_types" class="Symfony\Component\Mime\MimeTypes">
+      <call method="setDefault">
+        <argument type="service" id="mime_types"/>
+      </call>
+    </service>
     <service id="security.authorization_checker" class="Symfony\Component\Security\Core\Authorization\AuthorizationChecker">
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="debug.security.access.decision_manager"/>
@@ -2119,6 +2459,7 @@
       <argument type="collection">
         <argument key="login" type="service" id=".service_locator.TYbLaTK"/>
         <argument key="register">null</argument>
+        <argument key="refresh">null</argument>
         <argument key="api" type="service" id=".service_locator.qe07GcU"/>
       </argument>
     </service>
@@ -2169,10 +2510,11 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="security.firewall.map" class="Symfony\Bundle\SecurityBundle\Security\FirewallMap">
-      <argument type="service" id=".service_locator.CehPBiV"/>
+      <argument type="service" id=".service_locator.5v0e_5m"/>
       <argument type="iterator">
         <argument key="security.firewall.map.context.login" type="service" id=".security.request_matcher.0hnHUuT"/>
         <argument key="security.firewall.map.context.register" type="service" id=".security.request_matcher.rweOSym"/>
+        <argument key="security.firewall.map.context.refresh" type="service" id=".security.request_matcher.lA7pkgD"/>
         <argument key="security.firewall.map.context.api" type="service" id=".security.request_matcher.NaFk5J1"/>
       </argument>
     </service>
@@ -2244,10 +2586,10 @@
     <service id="cache.security_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>1syEEx1PF-</argument>
+      <argument>kTiAEZndg9</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -2260,20 +2602,20 @@
     <service id="cache.security_is_granted_attribute_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>V28qWVnEQj</argument>
+      <argument>lL9NNyJeha</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.security_is_csrf_token_valid_attribute_expression_language" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool" pruneable="false"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>kM+DLXn9AK</argument>
+      <argument>Fda1Q4C53C</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/html/var/cache/dev/pools/system</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend/var/cache/dev/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -2321,6 +2663,13 @@
       </call>
       <call method="add">
         <argument type="service" id=".security.request_matcher.3lPV7yj"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.yxJuOHw"/>
         <argument type="collection">
           <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
         </argument>
@@ -2682,7 +3031,7 @@
       <tag name="console.command" command="debug:firewall"/>
       <tag name="container.no_preload"/>
       <argument>%security.firewalls%</argument>
-      <argument type="service" id=".service_locator.CehPBiV"/>
+      <argument type="service" id=".service_locator.5v0e_5m"/>
       <argument type="service" id=".service_locator.NW8xGL3"/>
       <argument type="collection">
         <argument key="login" type="collection">
@@ -2850,6 +3199,35 @@
       <argument>null</argument>
       <argument type="service" id="security.firewall.map.config.register"/>
     </service>
+    <service id="security.firewall.map.config.refresh" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
+      <argument>refresh</argument>
+      <argument>security.user_checker</argument>
+      <argument>.security.request_matcher.lA7pkgD</argument>
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id=".security.request_matcher.6AWB5cP" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/api/auth/refresh</argument>
+    </service>
+    <service id=".security.request_matcher.lA7pkgD" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.6AWB5cP"/>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.refresh" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+      <argument type="iterator"/>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="service" id="security.firewall.map.config.refresh"/>
+    </service>
     <service id="security.firewall.map.config.api" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>api</argument>
       <argument>security.user_checker</argument>
@@ -2937,11 +3315,12 @@
       <argument>null</argument>
       <argument type="service" id="security.firewall.map.config.api"/>
     </service>
-    <service id=".service_locator.CehPBiV" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.5v0e_5m" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="security.firewall.map.context.login" type="service_closure" id="security.firewall.map.context.login"/>
         <argument key="security.firewall.map.context.register" type="service_closure" id="security.firewall.map.context.register"/>
+        <argument key="security.firewall.map.context.refresh" type="service_closure" id="security.firewall.map.context.refresh"/>
         <argument key="security.firewall.map.context.api" type="service_closure" id="security.firewall.map.context.api"/>
       </argument>
     </service>
@@ -2953,6 +3332,11 @@
     <service id=".security.request_matcher.3lPV7yj" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
       <argument type="collection">
         <argument type="service" id=".security.request_matcher.skclgQe"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.yxJuOHw" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.6AWB5cP"/>
       </argument>
     </service>
     <service id=".security.request_matcher.0tMb.ud" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
@@ -3302,7 +3686,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.JMc_vd7"/>
+      <argument type="service" id=".service_locator.iAk.GjW"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3501,6 +3885,11 @@
         <argument type="collection">
           <argument key="User">App\User\Infrastructure\Persistence</argument>
           <argument key="Auth">App\Auth\Infrastructure\Persistence</argument>
+          <argument key="Task">App\Task\Infrastructure\Persistence</argument>
+          <argument key="Category">App\Category\Infrastructure\Persistence</argument>
+          <argument key="Goal">App\Goal\Infrastructure\Persistence</argument>
+          <argument key="Habit">App\Habit\Infrastructure\Persistence</argument>
+          <argument key="Reminder">App\Reminder\Infrastructure\Persistence</argument>
         </argument>
       </call>
       <call method="enableNativeLazyObjects">
@@ -3550,8 +3939,13 @@
     </service>
     <service id="doctrine.orm.default_attribute_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AttributeDriver">
       <argument type="collection">
-        <argument>/var/www/html/src/User/Infrastructure/Persistence</argument>
-        <argument>/var/www/html/src/Auth/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/User/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Auth/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Task/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Category/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Goal/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Habit/Infrastructure/Persistence</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/src/Reminder/Infrastructure/Persistence</argument>
       </argument>
     </service>
     <service id="cache.doctrine.orm.default.metadata" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
@@ -3607,7 +4001,7 @@
     <service id="doctrine.migrations.configuration" class="Doctrine\Migrations\Configuration\Configuration">
       <call method="addMigrationsDirectory">
         <argument>DoctrineMigrations</argument>
-        <argument>/var/www/html/migrations</argument>
+        <argument>/home/victor/Документы/Projects/Novera/backend/migrations</argument>
       </call>
       <call method="setAllOrNothing">
         <argument>false</argument>
@@ -3792,7 +4186,7 @@
       <argument type="service" id="filesystem"/>
       <argument type="service" id="maker.autoloader_util"/>
       <argument type="service" id="maker.file_link_formatter"/>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <argument>null</argument>
     </service>
     <service id="maker.autoloader_finder" class="Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder">
@@ -3822,6 +4216,26 @@
           </argument>
           <argument type="collection">
             <argument>App\Auth\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Task\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Category\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Goal\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Habit\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Reminder\Infrastructure\Persistence</argument>
             <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
           </argument>
         </argument>
@@ -3974,7 +4388,7 @@
     </service>
     <service id="maker.maker.make_migration" class="Symfony\Bundle\MakerBundle\Maker\MakeMigration">
       <tag name="maker.command"/>
-      <argument>/var/www/html</argument>
+      <argument>/home/victor/Документы/Projects/Novera/backend</argument>
       <argument type="service" id="maker.file_link_formatter"/>
     </service>
     <service id="maker.maker.make_stimulus_controller" class="Symfony\Bundle\MakerBundle\Maker\MakeStimulusController">
@@ -4008,6 +4422,51 @@
     <service id=".abstract.instanceof.App\Auth\Infrastructure\Persistence\RefreshTokenEntity" class="App\Auth\Infrastructure\Persistence\RefreshTokenEntity" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Auth\Infrastructure\Repository\RefreshTokenRepository" class="App\Auth\Infrastructure\Repository\RefreshTokenRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Auth\Infrastructure\Repository\RefreshTokenRepository" class="App\Auth\Infrastructure\Repository\RefreshTokenRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Category\Controller\CategoryController.0.App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Category\Infrastructure\Persistence\CategoryEntity.0.App\Category\Infrastructure\Persistence\CategoryEntity" class="App\Category\Infrastructure\Persistence\CategoryEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Category\Infrastructure\Persistence\CategoryEntity" class="App\Category\Infrastructure\Persistence\CategoryEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Goal\Controller\GoalController.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Goal\Infrastructure\Persistence\GoalEntity.0.App\Goal\Infrastructure\Persistence\GoalEntity" class="App\Goal\Infrastructure\Persistence\GoalEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Goal\Infrastructure\Persistence\GoalEntity" class="App\Goal\Infrastructure\Persistence\GoalEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Habit\Application\Command\GenerateHabitLogsCommand" class="App\Habit\Application\Command\GenerateHabitLogsCommand" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Habit\Application\Command\GenerateHabitLogsCommand.0.App\Habit\Application\Command\GenerateHabitLogsCommand" class="App\Habit\Application\Command\GenerateHabitLogsCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Habit\Application\Command\GenerateHabitLogsCommand" class="App\Habit\Application\Command\GenerateHabitLogsCommand" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Habit\Application\Command\MarkSkippedHabitLogsCommand" class="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Habit\Application\Command\MarkSkippedHabitLogsCommand.0.App\Habit\Application\Command\MarkSkippedHabitLogsCommand" class="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Habit\Application\Command\MarkSkippedHabitLogsCommand" class="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Habit\Controller\HabitController" class="App\Habit\Controller\HabitController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Habit\Controller\HabitController" class="App\Habit\Controller\HabitController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Habit\Controller\HabitController.0.App\Habit\Controller\HabitController" class="App\Habit\Controller\HabitController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Habit\Controller\HabitController" class="App\Habit\Controller\HabitController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Habit\Infrastructure\Persistence\HabitEntity.0.App\Habit\Infrastructure\Persistence\HabitEntity" class="App\Habit\Infrastructure\Persistence\HabitEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Habit\Infrastructure\Persistence\HabitEntity" class="App\Habit\Infrastructure\Persistence\HabitEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Habit\Infrastructure\Persistence\HabitLogEntity.0.App\Habit\Infrastructure\Persistence\HabitLogEntity" class="App\Habit\Infrastructure\Persistence\HabitLogEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Habit\Infrastructure\Persistence\HabitLogEntity" class="App\Habit\Infrastructure\Persistence\HabitLogEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Reminder\Application\Command\SendDueReminderEmailsCommand.0.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Reminder\Controller\ReminderController.0.App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Reminder\Infrastructure\Persistence\ReminderEntity.0.App\Reminder\Infrastructure\Persistence\ReminderEntity" class="App\Reminder\Infrastructure\Persistence\ReminderEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Reminder\Infrastructure\Persistence\ReminderEntity" class="App\Reminder\Infrastructure\Persistence\ReminderEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Task\Controller\TaskController.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.UnitEnum.0.App\Task\Domain\Enum\TaskStatusEnum" class="App\Task\Domain\Enum\TaskStatusEnum" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Task\Domain\Enum\TaskStatusEnum" class="App\Task\Domain\Enum\TaskStatusEnum" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Task\Infrastructure\Persistence\TaskEntity.0.App\Task\Infrastructure\Persistence\TaskEntity" class="App\Task\Infrastructure\Persistence\TaskEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Task\Infrastructure\Persistence\TaskEntity" class="App\Task\Infrastructure\Persistence\TaskEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\User\Controller\UserController.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
@@ -4597,25 +5056,20 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ijCeiC6" method="withContext"/>
     </service>
-    <service id=".errored.OwzNfEO" class="App\Auth\Infrastructure\Security\RefreshTokenGenerator">
-      <tag name="container.error" message="Cannot determine controller argument for &quot;App\Auth\Controller\RefreshTokenController::__invoke()&quot;: the $generator argument is type-hinted with the non-existent class or interface: &quot;App\Auth\Infrastructure\Security\RefreshTokenGenerator&quot;."/>
-    </service>
-    <service id=".service_locator.hj9n2Lm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.JZG_GAb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="refreshTokens" type="service_closure" id="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
         <argument key="jwtManager" type="service_closure" id="lexik_jwt_authentication.jwt_manager"/>
-        <argument key="generator" type="service_closure" id=".errored.OwzNfEO"/>
-        <argument key="security" type="service_closure" id="security.helper"/>
       </argument>
     </service>
-    <service id=".service_locator.hj9n2Lm.App\Auth\Controller\RefreshTokenController::__invoke()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.JZG_GAb.App\Auth\Controller\RefreshTokenController::__invoke()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Auth\Controller\RefreshTokenController::__invoke()"/>
       <argument>App\Auth\Controller\RefreshTokenController::__invoke()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.hj9n2Lm" method="withContext"/>
+      <factory service=".service_locator.JZG_GAb" method="withContext"/>
     </service>
-    <service id=".service_locator.OyU6nkc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.9ye1zQh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
@@ -4623,13 +5077,13 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
         <argument key="App\Auth\Controller\LogoutController::__invoke" type="service_closure" id=".service_locator.ijCeiC6.App\Auth\Controller\LogoutController::__invoke()"/>
-        <argument key="App\Auth\Controller\RefreshTokenController::__invoke" type="service_closure" id=".service_locator.hj9n2Lm.App\Auth\Controller\RefreshTokenController::__invoke()"/>
+        <argument key="App\Auth\Controller\RefreshTokenController::__invoke" type="service_closure" id=".service_locator.JZG_GAb.App\Auth\Controller\RefreshTokenController::__invoke()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
         <argument key="App\Auth\Controller\LogoutController:__invoke" type="service_closure" id=".service_locator.ijCeiC6.App\Auth\Controller\LogoutController::__invoke()"/>
         <argument key="App\Auth\Controller\LogoutController" type="service_closure" id=".service_locator.ijCeiC6.App\Auth\Controller\LogoutController::__invoke()"/>
-        <argument key="App\Auth\Controller\RefreshTokenController:__invoke" type="service_closure" id=".service_locator.hj9n2Lm.App\Auth\Controller\RefreshTokenController::__invoke()"/>
-        <argument key="App\Auth\Controller\RefreshTokenController" type="service_closure" id=".service_locator.hj9n2Lm.App\Auth\Controller\RefreshTokenController::__invoke()"/>
+        <argument key="App\Auth\Controller\RefreshTokenController:__invoke" type="service_closure" id=".service_locator.JZG_GAb.App\Auth\Controller\RefreshTokenController::__invoke()"/>
+        <argument key="App\Auth\Controller\RefreshTokenController" type="service_closure" id=".service_locator.JZG_GAb.App\Auth\Controller\RefreshTokenController::__invoke()"/>
       </argument>
     </service>
     <service id=".service_locator.nqEKT7G" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -4733,10 +5187,11 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.JMc_vd7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.iAk.GjW" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Auth\Infrastructure\Repository\RefreshTokenRepository" type="service_closure" id="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
+        <argument key="App\Task\Infrastructure\Repository\TaskRepository" type="service_closure" id="App\Task\Infrastructure\Repository\TaskRepository"/>
         <argument key="App\User\Infrastructure\Repository\UserRepository" type="service_closure" id="App\User\Infrastructure\Repository\UserRepository"/>
       </argument>
     </service>
@@ -4796,6 +5251,36 @@
     <service id=".service_locator.TJNRSaV.App\Auth\Controller\RegisterController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Auth\Controller\RegisterController"/>
       <argument>App\Auth\Controller\RegisterController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Category\Controller\CategoryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Category\Controller\CategoryController"/>
+      <argument>App\Category\Controller\CategoryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Goal\Controller\GoalController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Goal\Controller\GoalController"/>
+      <argument>App\Goal\Controller\GoalController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Habit\Controller\HabitController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Habit\Controller\HabitController"/>
+      <argument>App\Habit\Controller\HabitController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Reminder\Controller\ReminderController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Reminder\Controller\ReminderController"/>
+      <argument>App\Reminder\Controller\ReminderController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Task\Controller\TaskController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Task\Controller\TaskController"/>
+      <argument>App\Task\Controller\TaskController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
@@ -4938,6 +5423,11 @@
           <argument>App\Auth\Controller\LogoutController</argument>
           <argument>App\Auth\Controller\RefreshTokenController</argument>
           <argument>App\Auth\Controller\RegisterController</argument>
+          <argument>App\Category\Controller\CategoryController</argument>
+          <argument>App\Goal\Controller\GoalController</argument>
+          <argument>App\Habit\Controller\HabitController</argument>
+          <argument>App\Reminder\Controller\ReminderController</argument>
+          <argument>App\Task\Controller\TaskController</argument>
           <argument>App\User\Controller\UserController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -4990,9 +5480,50 @@
         <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
         <argument>App\Auth\Infrastructure\Persistence</argument>
       </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Task\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Category\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Goal\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Habit\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Reminder\Infrastructure\Persistence</argument>
+      </call>
     </service>
     <service id=".errored..service_locator.1vYpZ1B.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.1vYpZ1B&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".App\Habit\Application\Command\GenerateHabitLogsCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>app:habits:generate-logs</argument>
+      <argument type="collection"/>
+      <argument>Создать pending-логи для активных привычек на сегодня по их frequency</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="App\Habit\Application\Command\GenerateHabitLogsCommand"/>
+    </service>
+    <service id=".App\Habit\Application\Command\MarkSkippedHabitLogsCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>app:habits:mark-skipped</argument>
+      <argument type="collection"/>
+      <argument>Пометить просроченные pending-логи привычек как skipped</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="App\Habit\Application\Command\MarkSkippedHabitLogsCommand"/>
+    </service>
+    <service id=".App\Reminder\Application\Command\SendDueReminderEmailsCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>app:reminders:send-due-emails</argument>
+      <argument type="collection"/>
+      <argument>Отправить e-mail по всем активным напоминаниям, у которых наступило время (notify_at &lt;= now)</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="App\Reminder\Application\Command\SendDueReminderEmailsCommand"/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -5189,6 +5720,13 @@
       <argument>Dump error pages to plain HTML files that can be directly served by a web server</argument>
       <argument>false</argument>
       <argument type="service_closure" id="console.command.error_dumper"/>
+    </service>
+    <service id=".console.command.mailer_test.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>mailer:test</argument>
+      <argument type="collection"/>
+      <argument>Test Mailer transports by sending an email</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="console.command.mailer_test"/>
     </service>
     <service id=".security.command.debug_firewall.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>debug:firewall</argument>
@@ -5533,8 +6071,11 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.8BQXkkm"/>
+      <argument type="service" id=".service_locator.ig5B7D0"/>
       <argument type="collection">
+        <argument key="app:habits:generate-logs">App\Habit\Application\Command\GenerateHabitLogsCommand</argument>
+        <argument key="app:habits:mark-skipped">App\Habit\Application\Command\MarkSkippedHabitLogsCommand</argument>
+        <argument key="app:reminders:send-due-emails">App\Reminder\Application\Command\SendDueReminderEmailsCommand</argument>
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
         <argument key="cache:clear">console.command.cache_clear</argument>
@@ -5563,6 +6104,7 @@
         <argument key="secrets:decrypt-to-local">console.command.secrets_decrypt_to_local</argument>
         <argument key="secrets:encrypt-from-local">console.command.secrets_encrypt_from_local</argument>
         <argument key="error:dump">console.command.error_dumper</argument>
+        <argument key="mailer:test">console.command.mailer_test</argument>
         <argument key="debug:firewall">security.command.debug_firewall</argument>
         <argument key="security:hash-password">security.command.user_password_hash</argument>
         <argument key="debug:security:role-hierarchy">security.command.role_hierarchy_dump</argument>
@@ -5634,9 +6176,12 @@
         <argument key="make:webhook">maker.auto_command.make_webhook</argument>
       </argument>
     </service>
-    <service id=".service_locator.8BQXkkm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ig5B7D0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Habit\Application\Command\GenerateHabitLogsCommand" type="service_closure" id=".App\Habit\Application\Command\GenerateHabitLogsCommand.lazy"/>
+        <argument key="App\Habit\Application\Command\MarkSkippedHabitLogsCommand" type="service_closure" id=".App\Habit\Application\Command\MarkSkippedHabitLogsCommand.lazy"/>
+        <argument key="App\Reminder\Application\Command\SendDueReminderEmailsCommand" type="service_closure" id=".App\Reminder\Application\Command\SendDueReminderEmailsCommand.lazy"/>
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
         <argument key="console.command.assets_install" type="service_closure" id=".console.command.assets_install.lazy"/>
         <argument key="console.command.cache_clear" type="service_closure" id=".console.command.cache_clear.lazy"/>
@@ -5665,6 +6210,7 @@
         <argument key="console.command.secrets_decrypt_to_local" type="service_closure" id=".console.command.secrets_decrypt_to_local.lazy"/>
         <argument key="console.command.secrets_encrypt_from_local" type="service_closure" id=".console.command.secrets_encrypt_from_local.lazy"/>
         <argument key="console.command.error_dumper" type="service_closure" id=".console.command.error_dumper.lazy"/>
+        <argument key="console.command.mailer_test" type="service_closure" id=".console.command.mailer_test.lazy"/>
         <argument key="security.command.debug_firewall" type="service_closure" id=".security.command.debug_firewall.lazy"/>
         <argument key="security.command.user_password_hash" type="service_closure" id=".security.command.user_password_hash.lazy"/>
         <argument key="security.command.role_hierarchy_dump" type="service_closure" id=".security.command.role_hierarchy_dump.lazy"/>
@@ -5734,6 +6280,16 @@
       </argument>
     </service>
     <service id="App\Auth\Domain\Repository\RefreshTokenRepositoryInterface" alias="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
+    <service id="App\Category\Domain\Repository\CategoryRepositoryInterface" alias="App\Category\Infrastructure\Repository\CategoryRepository"/>
+    <service id="App\Category\Domain\Service\CategoryServiceInterface" alias="App\Category\Application\Service\CategoryService"/>
+    <service id="App\Goal\Domain\Repository\GoalRepositoryInterface" alias="App\Goal\Infrastructure\Repository\GoalRepository"/>
+    <service id="App\Goal\Domain\Service\GoalServiceInterface" alias="App\Goal\Application\Service\GoalService"/>
+    <service id="App\Habit\Domain\Repository\HabitRepositoryInterface" alias="App\Habit\Infrastructure\Repository\HabitRepository"/>
+    <service id="App\Habit\Domain\Service\HabitServiceInterface" alias="App\Habit\Application\Service\HabitService"/>
+    <service id="App\Reminder\Domain\Repository\ReminderRepositoryInterface" alias="App\Reminder\Infrastructure\Repository\ReminderRepository"/>
+    <service id="App\Reminder\Domain\Service\ReminderServiceInterface" alias="App\Reminder\Application\Service\ReminderService"/>
+    <service id="App\Task\Domain\Repository\TaskRepositoryInterface" alias="App\Task\Infrastructure\Repository\TaskRepository"/>
+    <service id="App\Task\Domain\Service\TaskServiceInterface" alias="App\Task\Application\Service\TaskService"/>
     <service id="App\User\Domain\Repository\UserRepositoryInterface" alias="App\User\Infrastructure\Repository\UserRepository"/>
     <service id="App\User\Domain\Service\UserServiceInterface" alias="App\User\Application\Service\UserService"/>
     <service id="App\Kernel" alias="kernel" public="true"/>
@@ -5770,6 +6326,10 @@
     <service id="Symfony\Contracts\Cache\CacheInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\NamespacedPoolInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable"/>
+    <service id="mailer" alias="mailer.mailer"/>
+    <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
+    <service id="mailer.default_transport" alias="mailer.transports"/>
+    <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.transports"/>
     <service id="Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter" alias="debug.file_link_formatter"/>
     <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch"/>
     <service id="router" alias="router.default" public="true"/>
@@ -5807,6 +6367,8 @@
     <service id="Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface" alias="security.csrf.token_generator"/>
     <service id="Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface" alias="security.csrf.token_storage"/>
     <service id="Symfony\Component\Security\Csrf\CsrfTokenManagerInterface" alias="security.csrf.token_manager"/>
+    <service id="Symfony\Component\Mime\MimeTypesInterface" alias="mime_types"/>
+    <service id="Symfony\Component\Mime\MimeTypeGuesserInterface" alias="mime_types"/>
     <service id="Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface" alias="security.authorization_checker"/>
     <service id="Symfony\Component\Security\Core\Authorization\UserAuthorizationCheckerInterface" alias="security.authorization_checker"/>
     <service id="Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface" alias="security.token_storage"/>
@@ -5829,7 +6391,7 @@
     <service id="security.user_checker.login" alias="security.user_checker"/>
     <service id="security.authentication.session_strategy.api" alias="security.authentication.session_strategy_noop"/>
     <service id="security.user_checker.api" alias="security.user_checker"/>
-    <service id="security.firewall.context_locator" alias=".service_locator.CehPBiV"/>
+    <service id="security.firewall.context_locator" alias=".service_locator.5v0e_5m"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface" alias="lexik_jwt_authentication.jwt_manager"/>
     <service id="Lexik\Bundle\JWTAuthenticationBundle\Services\JWSProvider\JWSProviderInterface" alias="lexik_jwt_authentication.jws_provider.lcobucci"/>
@@ -5855,7 +6417,7 @@
     <service id="doctrine.orm.default_entity_manager.event_manager" alias="doctrine.dbal.default_connection.event_manager"/>
     <service id="doctrine.migrations.metadata_storage" alias="doctrine.migrations.storage.table_storage"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.ryAvHi4" public="true"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.OyU6nkc"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.9ye1zQh"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.W55Po6X"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
@@ -5869,7 +6431,7 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.c0wzfI4" alias=".service_locator.1vYpZ1B"/>
     <service id=".service_locator.jDACAeh" alias=".service_locator.ijCeiC6"/>
-    <service id=".service_locator.9P3xtu9" alias=".service_locator.hj9n2Lm"/>
+    <service id=".service_locator.HgEIyOu" alias=".service_locator.JZG_GAb"/>
     <service id=".service_locator.y3U337F" alias=".service_locator.TJNRSaV"/>
   </services>
 </container>

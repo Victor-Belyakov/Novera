@@ -21,9 +21,9 @@ interface RefreshTokenRepositoryInterface
 
     /**
      * @param string $token
-     * @return object|null
+     * @return RefreshTokenEntity|null
      */
-    public function findByToken(string $token): ?object;
+    public function findByToken(string $token): ?RefreshTokenEntity;
 
     /**
      * @param UserEntity $user

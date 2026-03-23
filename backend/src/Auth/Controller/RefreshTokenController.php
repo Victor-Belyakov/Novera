@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use App\Auth\Domain\Repository\RefreshTokenRepositoryInterface;
-use App\Auth\Infrastructure\Security\RefreshTokenGenerator;
-use Symfony\Bundle\SecurityBundle\Security;
 use Exception;
 
 #[Route('/auth/refresh', methods: ['POST'])]
@@ -19,16 +17,12 @@ final class RefreshTokenController
      * @param Request $request
      * @param RefreshTokenRepositoryInterface $refreshTokens
      * @param JWTTokenManagerInterface $jwtManager
-     * @param RefreshTokenGenerator $generator
-     * @param Security $security
      * @return JsonResponse
      */
     public function __invoke(
         Request $request,
         RefreshTokenRepositoryInterface $refreshTokens,
-        JWTTokenManagerInterface $jwtManager,
-        RefreshTokenGenerator $generator,
-        Security $security
+        JWTTokenManagerInterface $jwtManager
     ): JsonResponse {
         try {
             $data = json_decode($request->getContent(), true);

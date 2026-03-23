@@ -23,6 +23,42 @@ const routes = [
     component: Home,
     meta: { requiresAuth: true },
   },
+  {
+    path: ROUTES.USERS,
+    name: ROUTE_NAMES.USERS,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.TASKS,
+    name: ROUTE_NAMES.TASKS,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.GOALS,
+    name: ROUTE_NAMES.GOALS,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.HABITS,
+    name: ROUTE_NAMES.HABITS,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.SETTINGS,
+    name: ROUTE_NAMES.SETTINGS,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.SETTINGS_CATEGORIES,
+    name: ROUTE_NAMES.SETTINGS_CATEGORIES,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({

@@ -6,6 +6,7 @@ use App\Auth\Infrastructure\Persistence\RefreshTokenEntity;
 use App\Auth\Infrastructure\Repository\RefreshTokenRepository;
 use DateTimeImmutable;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
+use Random\RandomException;
 
 readonly class LoginSuccessListener
 {
@@ -20,6 +21,7 @@ readonly class LoginSuccessListener
     /**
      * @param AuthenticationSuccessEvent $event
      * @return void
+     * @throws RandomException
      */
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event): void
     {

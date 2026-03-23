@@ -56,11 +56,13 @@ class RefreshTokenRepository extends ServiceEntityRepository implements RefreshT
 
     /**
      * @param string $token
-     * @return object
+     * @return RefreshTokenEntity|null
      */
-    public function findByToken(string $token): object
+    public function findByToken(string $token): ?RefreshTokenEntity
     {
-        return $this->findOneBy(['token' => $token]);
+        $result = $this->findOneBy(['token' => $token]);
+
+        return $result instanceof RefreshTokenEntity ? $result : null;
     }
 
     /**

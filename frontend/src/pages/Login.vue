@@ -14,28 +14,26 @@
             v-model="formData.name"
             type="text"
             placeholder="Имя"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
+            class="app-input"
             required
           />
           <input
             v-model="formData.lastName"
             type="text"
             placeholder="Фамилия"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
+            class="app-input"
             required
           />
           <input
             v-model="formData.middleName"
             type="text"
             placeholder="Отчество (необязательно)"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
+            class="app-input"
           />
-          <input
+          <AppDatePicker
             v-model="formData.dateOfBirth"
-            type="date"
+            :show-time="false"
             placeholder="Дата рождения"
-            class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
-            required
           />
         </template>
 
@@ -43,14 +41,14 @@
           v-model="formData.email"
           type="email"
           placeholder="Email"
-          class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
+          class="app-input"
           required
         />
         <input
           v-model="formData.password"
           type="password"
           placeholder="Пароль"
-          class="bg-white border border-gray-400 text-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-950 placeholder-gray-500 transition"
+          class="app-input"
           required
         />
 
@@ -81,6 +79,7 @@ import { useAuth } from '@/composables/useAuth'
 import { useNotifications } from '@/composables/useNotifications'
 import { API_ENDPOINTS } from '@/constants/api'
 import { ROUTES } from '@/constants/routes'
+import AppDatePicker from '@/components/AppDatePicker.vue'
 
 const router = useRouter()
 const { login: loginAuth } = useAuth()

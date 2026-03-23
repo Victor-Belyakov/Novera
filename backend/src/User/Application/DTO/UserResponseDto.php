@@ -9,6 +9,7 @@ final readonly class UserResponseDto
     public function __construct(
         public int $id,
         public string $email,
+        public ?string $phone,
         public string $name,
         #[SerializedName('last_name')]
         public string $last_name,
@@ -16,6 +17,8 @@ final readonly class UserResponseDto
         public ?string $middle_name = null,
         #[SerializedName('date_of_birth')]
         public ?string $date_of_birth = null,
+        #[SerializedName('telegram_id')]
+        public ?string $telegram_id = null,
     ) {
     }
 }
