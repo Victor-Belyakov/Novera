@@ -4,6 +4,7 @@ namespace App\Goal\Infrastructure\Repository;
 
 use App\Goal\Domain\Repository\GoalRepositoryInterface;
 use App\Goal\Infrastructure\Persistence\GoalEntity;
+use App\User\Infrastructure\Persistence\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -33,6 +34,19 @@ final class GoalRepository implements GoalRepositoryInterface
             ->leftJoin('g.category', 'c')->addSelect('c')
             ->leftJoin('g.createdBy', 'u')->addSelect('u')
             ->where('g.deletedAt IS NULL')
+            ->orderBy('g.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByUser(UserEntity $user): array
+    {
+        return $this->repository->createQueryBuilder('g')
+            ->leftJoin('g.category', 'c')->addSelect('c')
+            ->leftJoin('g.createdBy', 'u')->addSelect('u')
+            ->where('g.createdBy = :user')
+            ->andWhere('g.deletedAt IS NULL')
+            ->setParameter('user', $user)
             ->orderBy('g.title', 'ASC')
             ->getQuery()
             ->getResult();

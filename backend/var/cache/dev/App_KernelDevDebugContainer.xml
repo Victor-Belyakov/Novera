@@ -138,6 +138,9 @@
     <parameter key="security.authentication.session_strategy.strategy">migrate</parameter>
     <parameter key=".security.authentication.expose_security_errors" type="constant">Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::None</parameter>
     <parameter key="security.firewalls" type="collection">
+      <parameter>telegram_webhook</parameter>
+      <parameter>telegram_auth</parameter>
+      <parameter>telegram_config</parameter>
       <parameter>login</parameter>
       <parameter>register</parameter>
       <parameter>refresh</parameter>
@@ -254,6 +257,118 @@
     <service id="App\Category\Infrastructure\Repository\CategoryRepository" class="App\Category\Infrastructure\Repository\CategoryRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
+    <service id="App\Finance\Application\DTO\FinanceCreateRequestDto" class="App\Finance\Application\DTO\FinanceCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Finance\Application\DTO\FinanceCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Finance\Application\DTO\FinanceResponseDto" class="App\Finance\Application\DTO\FinanceResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Finance\Application\DTO\FinanceResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Finance\Application\DTO\FinanceUpdateRequestDto" class="App\Finance\Application\DTO\FinanceUpdateRequestDto" autowire="true" autoconfigure="true"/>
+    <service id="App\Finance\Application\Service\FinanceService" class="App\Finance\Application\Service\FinanceService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+      <argument type="service" id="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository"/>
+    </service>
+    <service id="App\Finance\Controller\FinanceController" class="App\Finance\Controller\FinanceController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Finance\Application\Service\FinanceService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Finance\Controller\FinanceController"/>
+      </call>
+    </service>
+    <service id="App\Finance\Domain\Enum\FinanceTypeEnum" class="App\Finance\Domain\Enum\FinanceTypeEnum" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's an enum"/>
+    </service>
+    <service id=".abstract.App\Finance\Domain\Repository\FinanceRepositoryInterface" class="App\Finance\Domain\Repository\FinanceRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\Finance\Domain\Service\FinanceServiceInterface" class="App\Finance\Domain\Service\FinanceServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Finance\Infrastructure\Persistence\FinanceEntity" class="App\Finance\Infrastructure\Persistence\FinanceEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Finance\Infrastructure\Repository\FinanceRepository" class="App\Finance\Infrastructure\Repository\FinanceRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\FinanceCategory\Application\DTO\FinanceCategoryCreateRequestDto" class="App\FinanceCategory\Application\DTO\FinanceCategoryCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinanceCategory\Application\DTO\FinanceCategoryCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinanceCategory\Application\DTO\FinanceCategoryResponseDto" class="App\FinanceCategory\Application\DTO\FinanceCategoryResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinanceCategory\Application\DTO\FinanceCategoryResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinanceCategory\Application\Service\FinanceCategoryService" class="App\FinanceCategory\Application\Service\FinanceCategoryService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository"/>
+    </service>
+    <service id="App\FinanceCategory\Controller\FinanceCategoryController" class="App\FinanceCategory\Controller\FinanceCategoryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\FinanceCategory\Application\Service\FinanceCategoryService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\FinanceCategory\Controller\FinanceCategoryController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\FinanceCategory\Domain\Repository\FinanceCategoryRepositoryInterface" class="App\FinanceCategory\Domain\Repository\FinanceCategoryRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\FinanceCategory\Domain\Service\FinanceCategoryServiceInterface" class="App\FinanceCategory\Domain\Service\FinanceCategoryServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" class="App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" class="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\FinancePlan\Application\DTO\FinancePlanCreateRequestDto" class="App\FinancePlan\Application\DTO\FinancePlanCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinancePlan\Application\DTO\FinancePlanCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinancePlan\Application\DTO\FinancePlanResponseDto" class="App\FinancePlan\Application\DTO\FinancePlanResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinancePlan\Application\DTO\FinancePlanResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinancePlan\Application\DTO\FinancePlanSummaryResponseDto" class="App\FinancePlan\Application\DTO\FinancePlanSummaryResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinancePlan\Application\DTO\FinancePlanSummaryResponseDto&quot;: argument &quot;$month&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinancePlan\Application\DTO\FinancePlanSummaryRowDto" class="App\FinancePlan\Application\DTO\FinancePlanSummaryRowDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\FinancePlan\Application\DTO\FinancePlanSummaryRowDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\FinancePlan\Application\Service\FinancePlanService" class="App\FinancePlan\Application\Service\FinancePlanService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository"/>
+      <argument type="service" id="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository"/>
+      <argument type="service" id="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+    </service>
+    <service id="App\FinancePlan\Controller\FinancePlanController" class="App\FinancePlan\Controller\FinancePlanController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\FinancePlan\Application\Service\FinancePlanService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\FinancePlan\Controller\FinancePlanController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\FinancePlan\Domain\Repository\FinancePlanRepositoryInterface" class="App\FinancePlan\Domain\Repository\FinancePlanRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\FinancePlan\Domain\Service\FinancePlanServiceInterface" class="App\FinancePlan\Domain\Service\FinancePlanServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" class="App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" class="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Goal\Application\DTO\GoalCreateRequestDto" class="App\Goal\Application\DTO\GoalCreateRequestDto" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Goal\Application\DTO\GoalCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
@@ -350,6 +465,96 @@
     <service id="App\Habit\Infrastructure\Repository\HabitRepository" class="App\Habit\Infrastructure\Repository\HabitRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
+    <service id="App\HealthMetricEntry\Application\DTO\HealthMetricEntryCreateRequestDto" class="App\HealthMetricEntry\Application\DTO\HealthMetricEntryCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\HealthMetricEntry\Application\DTO\HealthMetricEntryCreateRequestDto&quot;: argument &quot;$metric_type_id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\HealthMetricEntry\Application\DTO\HealthMetricEntryResponseDto" class="App\HealthMetricEntry\Application\DTO\HealthMetricEntryResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\HealthMetricEntry\Application\DTO\HealthMetricEntryResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\HealthMetricEntry\Application\Service\HealthMetricEntryService" class="App\HealthMetricEntry\Application\Service\HealthMetricEntryService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository"/>
+      <argument type="service" id="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository"/>
+    </service>
+    <service id="App\HealthMetricEntry\Controller\HealthMetricEntryController" class="App\HealthMetricEntry\Controller\HealthMetricEntryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\HealthMetricEntry\Application\Service\HealthMetricEntryService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\HealthMetricEntry\Controller\HealthMetricEntryController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\HealthMetricEntry\Domain\Repository\HealthMetricEntryRepositoryInterface" class="App\HealthMetricEntry\Domain\Repository\HealthMetricEntryRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\HealthMetricEntry\Domain\Service\HealthMetricEntryServiceInterface" class="App\HealthMetricEntry\Domain\Service\HealthMetricEntryServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" class="App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" class="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\HealthMetricType\Application\DTO\HealthMetricTypeCreateRequestDto" class="App\HealthMetricType\Application\DTO\HealthMetricTypeCreateRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\HealthMetricType\Application\DTO\HealthMetricTypeCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\HealthMetricType\Application\DTO\HealthMetricTypeResponseDto" class="App\HealthMetricType\Application\DTO\HealthMetricTypeResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\HealthMetricType\Application\DTO\HealthMetricTypeResponseDto&quot;: argument &quot;$id&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\HealthMetricType\Application\Service\HealthMetricTypeService" class="App\HealthMetricType\Application\Service\HealthMetricTypeService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository"/>
+    </service>
+    <service id="App\HealthMetricType\Controller\HealthMetricTypeController" class="App\HealthMetricType\Controller\HealthMetricTypeController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\HealthMetricType\Application\Service\HealthMetricTypeService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\HealthMetricType\Controller\HealthMetricTypeController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\HealthMetricType\Domain\Repository\HealthMetricTypeRepositoryInterface" class="App\HealthMetricType\Domain\Repository\HealthMetricTypeRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id=".abstract.App\HealthMetricType\Domain\Service\HealthMetricTypeServiceInterface" class="App\HealthMetricType\Domain\Service\HealthMetricTypeServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" class="App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" class="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\PersonalState\Application\DTO\PersonalStateResponseDto" class="App\PersonalState\Application\DTO\PersonalStateResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\PersonalState\Application\DTO\PersonalStateResponseDto&quot;: argument &quot;$full_name&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\PersonalState\Application\Service\PersonalStateService" class="App\PersonalState\Application\Service\PersonalStateService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+      <argument type="service" id="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository"/>
+      <argument type="service" id="App\Goal\Infrastructure\Repository\GoalRepository"/>
+      <argument type="service" id="App\Habit\Infrastructure\Repository\HabitRepository"/>
+      <argument type="service" id="App\Task\Infrastructure\Repository\TaskRepository"/>
+      <argument type="service" id="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository"/>
+    </service>
+    <service id="App\PersonalState\Controller\PersonalStateController" class="App\PersonalState\Controller\PersonalStateController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\PersonalState\Application\Service\PersonalStateService"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\PersonalState\Controller\PersonalStateController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\PersonalState\Domain\Service\PersonalStateServiceInterface" class="App\PersonalState\Domain\Service\PersonalStateServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
     <service id="App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" autoconfigure="true">
       <tag name="console.command" command="app:reminders:send-due-emails" description="Отправить e-mail по всем активным напоминаниям, у которых наступило время (notify_at &lt;= now)" help=""/>
       <tag name="console.command"/>
@@ -401,6 +606,55 @@
     <service id="App\Reminder\Infrastructure\Repository\ReminderRepository" class="App\Reminder\Infrastructure\Repository\ReminderRepository" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
+    <service id="App\Statistic\Application\DTO\StatisticFinanceCategoryGroupDto" class="App\Statistic\Application\DTO\StatisticFinanceCategoryGroupDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticFinanceCategoryGroupDto&quot;: argument &quot;$category&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticFinanceDonutDto" class="App\Statistic\Application\DTO\StatisticFinanceDonutDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticFinanceDonutDto&quot;: argument &quot;$label&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticGoalCategoryGroupDto" class="App\Statistic\Application\DTO\StatisticGoalCategoryGroupDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticGoalCategoryGroupDto&quot;: argument &quot;$category&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticGoalDonutDto" class="App\Statistic\Application\DTO\StatisticGoalDonutDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticGoalDonutDto&quot;: argument &quot;$label&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticHabitCategoryGroupDto" class="App\Statistic\Application\DTO\StatisticHabitCategoryGroupDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticHabitCategoryGroupDto&quot;: argument &quot;$category&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticHabitDonutDto" class="App\Statistic\Application\DTO\StatisticHabitDonutDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticHabitDonutDto&quot;: argument &quot;$label&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticOverviewDto" class="App\Statistic\Application\DTO\StatisticOverviewDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticOverviewDto&quot;: argument &quot;$section&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticTaskCategoryGroupDto" class="App\Statistic\Application\DTO\StatisticTaskCategoryGroupDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticTaskCategoryGroupDto&quot;: argument &quot;$category&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticTaskDonutDto" class="App\Statistic\Application\DTO\StatisticTaskDonutDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticTaskDonutDto&quot;: argument &quot;$label&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\DTO\StatisticsResponseDto" class="App\Statistic\Application\DTO\StatisticsResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Statistic\Application\DTO\StatisticsResponseDto&quot;: argument &quot;$summary&quot; of method &quot;__construct()&quot; is type-hinted &quot;array&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Statistic\Application\Service\StatisticService" class="App\Statistic\Application\Service\StatisticService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Goal\Infrastructure\Repository\GoalRepository"/>
+      <argument type="service" id="App\Habit\Infrastructure\Repository\HabitRepository"/>
+      <argument type="service" id="App\Task\Infrastructure\Repository\TaskRepository"/>
+      <argument type="service" id="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+      <argument type="service" id="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository"/>
+    </service>
+    <service id="App\Statistic\Controller\StatisticController" class="App\Statistic\Controller\StatisticController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Statistic\Application\Service\StatisticService"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Statistic\Controller\StatisticController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Statistic\Domain\Service\StatisticServiceInterface" class="App\Statistic\Domain\Service\StatisticServiceInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
     <service id="App\Task\Application\DTO\TaskCreateRequestDto" class="App\Task\Application\DTO\TaskCreateRequestDto" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Task\Application\DTO\TaskCreateRequestDto&quot;: argument &quot;$title&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
@@ -437,6 +691,45 @@
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
     </service>
     <service id="App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Telegram\Application\DTO\TelegramAuthRequestDto" class="App\Telegram\Application\DTO\TelegramAuthRequestDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Telegram\Application\DTO\TelegramAuthRequestDto&quot;: argument &quot;$init_data&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Telegram\Application\DTO\TelegramAuthResponseDto" class="App\Telegram\Application\DTO\TelegramAuthResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Telegram\Application\DTO\TelegramAuthResponseDto&quot;: argument &quot;$token&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Telegram\Application\DTO\TelegramConnectLinkResponseDto" class="App\Telegram\Application\DTO\TelegramConnectLinkResponseDto" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Telegram\Application\DTO\TelegramConnectLinkResponseDto&quot;: argument &quot;$url&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\Telegram\Application\Service\TelegramService" class="App\Telegram\Application\Service\TelegramService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository"/>
+      <argument type="service" id="App\User\Infrastructure\Repository\UserRepository"/>
+      <argument type="service" id="lexik_jwt_authentication.jwt_manager"/>
+      <argument type="service" id="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
+      <argument>%env(default::TELEGRAM_BOT_TOKEN)%</argument>
+      <argument>%env(default::TELEGRAM_BOT_USERNAME)%</argument>
+      <argument>%env(default::TELEGRAM_MINI_APP_URL)%</argument>
+    </service>
+    <service id="App\Telegram\Controller\TelegramController" class="App\Telegram\Controller\TelegramController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Telegram\Application\Service\TelegramService"/>
+      <argument type="service" id="serializer"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Telegram\Controller\TelegramController"/>
+      </call>
+    </service>
+    <service id=".abstract.App\Telegram\Domain\Repository\TelegramLinkTokenRepositoryInterface" class="App\Telegram\Domain\Repository\TelegramLinkTokenRepositoryInterface" autowire="true" autoconfigure="true" abstract="true">
+      <tag name="container.excluded" source="because the class is abstract"/>
+    </service>
+    <service id="App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" class="App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" class="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -1959,10 +2252,18 @@
         <argument>App\Auth\Controller\RefreshTokenController</argument>
         <argument>App\Auth\Controller\RegisterController</argument>
         <argument>App\Category\Controller\CategoryController</argument>
+        <argument>App\Finance\Controller\FinanceController</argument>
+        <argument>App\FinanceCategory\Controller\FinanceCategoryController</argument>
+        <argument>App\FinancePlan\Controller\FinancePlanController</argument>
         <argument>App\Goal\Controller\GoalController</argument>
         <argument>App\Habit\Controller\HabitController</argument>
+        <argument>App\HealthMetricEntry\Controller\HealthMetricEntryController</argument>
+        <argument>App\HealthMetricType\Controller\HealthMetricTypeController</argument>
+        <argument>App\PersonalState\Controller\PersonalStateController</argument>
         <argument>App\Reminder\Controller\ReminderController</argument>
+        <argument>App\Statistic\Controller\StatisticController</argument>
         <argument>App\Task\Controller\TaskController</argument>
+        <argument>App\Telegram\Controller\TelegramController</argument>
         <argument>App\User\Controller\UserController</argument>
       </argument>
     </service>
@@ -2457,6 +2758,9 @@
     <service id="security.helper" class="Symfony\Bundle\SecurityBundle\Security">
       <argument type="service" id=".service_locator.rAuPNI6"/>
       <argument type="collection">
+        <argument key="telegram_webhook">null</argument>
+        <argument key="telegram_auth">null</argument>
+        <argument key="telegram_config">null</argument>
         <argument key="login" type="service" id=".service_locator.TYbLaTK"/>
         <argument key="register">null</argument>
         <argument key="refresh">null</argument>
@@ -2510,8 +2814,11 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="security.firewall.map" class="Symfony\Bundle\SecurityBundle\Security\FirewallMap">
-      <argument type="service" id=".service_locator.5v0e_5m"/>
+      <argument type="service" id=".service_locator.tnAxedV"/>
       <argument type="iterator">
+        <argument key="security.firewall.map.context.telegram_webhook" type="service" id=".security.request_matcher.5fC9tOj"/>
+        <argument key="security.firewall.map.context.telegram_auth" type="service" id=".security.request_matcher.IGTaPK0"/>
+        <argument key="security.firewall.map.context.telegram_config" type="service" id=".security.request_matcher.Ip0Td.Q"/>
         <argument key="security.firewall.map.context.login" type="service" id=".security.request_matcher.0hnHUuT"/>
         <argument key="security.firewall.map.context.register" type="service" id=".security.request_matcher.rweOSym"/>
         <argument key="security.firewall.map.context.refresh" type="service" id=".security.request_matcher.lA7pkgD"/>
@@ -2670,6 +2977,27 @@
       </call>
       <call method="add">
         <argument type="service" id=".security.request_matcher.yxJuOHw"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.fz_HeFP"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.72.nQB_"/>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.WkLfZik"/>
         <argument type="collection">
           <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
         </argument>
@@ -3031,7 +3359,7 @@
       <tag name="console.command" command="debug:firewall"/>
       <tag name="container.no_preload"/>
       <argument>%security.firewalls%</argument>
-      <argument type="service" id=".service_locator.5v0e_5m"/>
+      <argument type="service" id=".service_locator.tnAxedV"/>
       <argument type="service" id=".service_locator.NW8xGL3"/>
       <argument type="collection">
         <argument key="login" type="collection">
@@ -3054,6 +3382,93 @@
       <argument>App\User\Infrastructure\Persistence\UserEntity</argument>
       <argument>email</argument>
       <argument>null</argument>
+    </service>
+    <service id="security.firewall.map.config.telegram_webhook" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
+      <argument>telegram_webhook</argument>
+      <argument>security.user_checker</argument>
+      <argument>.security.request_matcher.5fC9tOj</argument>
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id=".security.request_matcher.JnWuOXI" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/api/telegram/webhook</argument>
+    </service>
+    <service id=".security.request_matcher.5fC9tOj" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.JnWuOXI"/>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.telegram_webhook" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+      <argument type="iterator"/>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="service" id="security.firewall.map.config.telegram_webhook"/>
+    </service>
+    <service id="security.firewall.map.config.telegram_auth" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
+      <argument>telegram_auth</argument>
+      <argument>security.user_checker</argument>
+      <argument>.security.request_matcher.IGTaPK0</argument>
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id=".security.request_matcher.XQfM40H" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/api/telegram/auth</argument>
+    </service>
+    <service id=".security.request_matcher.IGTaPK0" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.XQfM40H"/>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.telegram_auth" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+      <argument type="iterator"/>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="service" id="security.firewall.map.config.telegram_auth"/>
+    </service>
+    <service id="security.firewall.map.config.telegram_config" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
+      <argument>telegram_config</argument>
+      <argument>security.user_checker</argument>
+      <argument>.security.request_matcher.Ip0Td.Q</argument>
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id=".security.request_matcher.pPXCVYW" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/api/telegram/config</argument>
+    </service>
+    <service id=".security.request_matcher.Ip0Td.Q" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.pPXCVYW"/>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.telegram_config" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+      <argument type="iterator"/>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="service" id="security.firewall.map.config.telegram_config"/>
     </service>
     <service id="security.firewall.map.config.login" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>login</argument>
@@ -3315,9 +3730,12 @@
       <argument>null</argument>
       <argument type="service" id="security.firewall.map.config.api"/>
     </service>
-    <service id=".service_locator.5v0e_5m" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tnAxedV" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="security.firewall.map.context.telegram_webhook" type="service_closure" id="security.firewall.map.context.telegram_webhook"/>
+        <argument key="security.firewall.map.context.telegram_auth" type="service_closure" id="security.firewall.map.context.telegram_auth"/>
+        <argument key="security.firewall.map.context.telegram_config" type="service_closure" id="security.firewall.map.context.telegram_config"/>
         <argument key="security.firewall.map.context.login" type="service_closure" id="security.firewall.map.context.login"/>
         <argument key="security.firewall.map.context.register" type="service_closure" id="security.firewall.map.context.register"/>
         <argument key="security.firewall.map.context.refresh" type="service_closure" id="security.firewall.map.context.refresh"/>
@@ -3337,6 +3755,21 @@
     <service id=".security.request_matcher.yxJuOHw" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
       <argument type="collection">
         <argument type="service" id=".security.request_matcher.6AWB5cP"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.fz_HeFP" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.XQfM40H"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.72.nQB_" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.JnWuOXI"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.WkLfZik" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.pPXCVYW"/>
       </argument>
     </service>
     <service id=".security.request_matcher.0tMb.ud" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
@@ -3686,7 +4119,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.iAk.GjW"/>
+      <argument type="service" id=".service_locator.jsJIHer"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3890,6 +4323,12 @@
           <argument key="Goal">App\Goal\Infrastructure\Persistence</argument>
           <argument key="Habit">App\Habit\Infrastructure\Persistence</argument>
           <argument key="Reminder">App\Reminder\Infrastructure\Persistence</argument>
+          <argument key="FinanceCategory">App\FinanceCategory\Infrastructure\Persistence</argument>
+          <argument key="Finance">App\Finance\Infrastructure\Persistence</argument>
+          <argument key="FinancePlan">App\FinancePlan\Infrastructure\Persistence</argument>
+          <argument key="HealthMetricType">App\HealthMetricType\Infrastructure\Persistence</argument>
+          <argument key="HealthMetricEntry">App\HealthMetricEntry\Infrastructure\Persistence</argument>
+          <argument key="Telegram">App\Telegram\Infrastructure\Persistence</argument>
         </argument>
       </call>
       <call method="enableNativeLazyObjects">
@@ -3946,6 +4385,12 @@
         <argument>/var/www/html/src/Goal/Infrastructure/Persistence</argument>
         <argument>/var/www/html/src/Habit/Infrastructure/Persistence</argument>
         <argument>/var/www/html/src/Reminder/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/FinanceCategory/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/Finance/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/FinancePlan/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/HealthMetricType/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/HealthMetricEntry/Infrastructure/Persistence</argument>
+        <argument>/var/www/html/src/Telegram/Infrastructure/Persistence</argument>
       </argument>
     </service>
     <service id="cache.doctrine.orm.default.metadata" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
@@ -4238,6 +4683,30 @@
             <argument>App\Reminder\Infrastructure\Persistence</argument>
             <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
           </argument>
+          <argument type="collection">
+            <argument>App\FinanceCategory\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Finance\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\FinancePlan\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\HealthMetricType\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\HealthMetricEntry\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
+          <argument type="collection">
+            <argument>App\Telegram\Infrastructure\Persistence</argument>
+            <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+          </argument>
         </argument>
       </argument>
     </service>
@@ -4428,6 +4897,32 @@
     <service id=".abstract.instanceof.App\Category\Controller\CategoryController" class="App\Category\Controller\CategoryController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Category\Infrastructure\Persistence\CategoryEntity.0.App\Category\Infrastructure\Persistence\CategoryEntity" class="App\Category\Infrastructure\Persistence\CategoryEntity" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Category\Infrastructure\Persistence\CategoryEntity" class="App\Category\Infrastructure\Persistence\CategoryEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Finance\Controller\FinanceController" class="App\Finance\Controller\FinanceController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Finance\Controller\FinanceController" class="App\Finance\Controller\FinanceController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Finance\Controller\FinanceController.0.App\Finance\Controller\FinanceController" class="App\Finance\Controller\FinanceController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Finance\Controller\FinanceController" class="App\Finance\Controller\FinanceController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.UnitEnum.0.App\Finance\Domain\Enum\FinanceTypeEnum" class="App\Finance\Domain\Enum\FinanceTypeEnum" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Finance\Domain\Enum\FinanceTypeEnum" class="App\Finance\Domain\Enum\FinanceTypeEnum" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Finance\Infrastructure\Persistence\FinanceEntity.0.App\Finance\Infrastructure\Persistence\FinanceEntity" class="App\Finance\Infrastructure\Persistence\FinanceEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Finance\Infrastructure\Persistence\FinanceEntity" class="App\Finance\Infrastructure\Persistence\FinanceEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Finance\Infrastructure\Repository\FinanceRepository" class="App\Finance\Infrastructure\Repository\FinanceRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Finance\Infrastructure\Repository\FinanceRepository" class="App\Finance\Infrastructure\Repository\FinanceRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\FinanceCategory\Controller\FinanceCategoryController" class="App\FinanceCategory\Controller\FinanceCategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\FinanceCategory\Controller\FinanceCategoryController" class="App\FinanceCategory\Controller\FinanceCategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\FinanceCategory\Controller\FinanceCategoryController.0.App\FinanceCategory\Controller\FinanceCategoryController" class="App\FinanceCategory\Controller\FinanceCategoryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinanceCategory\Controller\FinanceCategoryController" class="App\FinanceCategory\Controller\FinanceCategoryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity.0.App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" class="App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" class="App\FinanceCategory\Infrastructure\Persistence\FinanceCategoryEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" class="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" class="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\FinancePlan\Controller\FinancePlanController" class="App\FinancePlan\Controller\FinancePlanController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\FinancePlan\Controller\FinancePlanController" class="App\FinancePlan\Controller\FinancePlanController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\FinancePlan\Controller\FinancePlanController.0.App\FinancePlan\Controller\FinancePlanController" class="App\FinancePlan\Controller\FinancePlanController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinancePlan\Controller\FinancePlanController" class="App\FinancePlan\Controller\FinancePlanController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity.0.App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" class="App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" class="App\FinancePlan\Infrastructure\Persistence\FinancePlanEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" class="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" class="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Goal\Controller\GoalController.0.App\Goal\Controller\GoalController" class="App\Goal\Controller\GoalController" autowire="true" abstract="true"/>
@@ -4448,6 +4943,26 @@
     <service id=".abstract.instanceof.App\Habit\Infrastructure\Persistence\HabitEntity" class="App\Habit\Infrastructure\Persistence\HabitEntity" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Habit\Infrastructure\Persistence\HabitLogEntity.0.App\Habit\Infrastructure\Persistence\HabitLogEntity" class="App\Habit\Infrastructure\Persistence\HabitLogEntity" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Habit\Infrastructure\Persistence\HabitLogEntity" class="App\Habit\Infrastructure\Persistence\HabitLogEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\HealthMetricEntry\Controller\HealthMetricEntryController" class="App\HealthMetricEntry\Controller\HealthMetricEntryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\HealthMetricEntry\Controller\HealthMetricEntryController" class="App\HealthMetricEntry\Controller\HealthMetricEntryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\HealthMetricEntry\Controller\HealthMetricEntryController.0.App\HealthMetricEntry\Controller\HealthMetricEntryController" class="App\HealthMetricEntry\Controller\HealthMetricEntryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricEntry\Controller\HealthMetricEntryController" class="App\HealthMetricEntry\Controller\HealthMetricEntryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity.0.App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" class="App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" class="App\HealthMetricEntry\Infrastructure\Persistence\HealthMetricEntryEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" class="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" class="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\HealthMetricType\Controller\HealthMetricTypeController" class="App\HealthMetricType\Controller\HealthMetricTypeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\HealthMetricType\Controller\HealthMetricTypeController" class="App\HealthMetricType\Controller\HealthMetricTypeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\HealthMetricType\Controller\HealthMetricTypeController.0.App\HealthMetricType\Controller\HealthMetricTypeController" class="App\HealthMetricType\Controller\HealthMetricTypeController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricType\Controller\HealthMetricTypeController" class="App\HealthMetricType\Controller\HealthMetricTypeController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity.0.App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" class="App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" class="App\HealthMetricType\Infrastructure\Persistence\HealthMetricTypeEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" class="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" class="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\PersonalState\Controller\PersonalStateController" class="App\PersonalState\Controller\PersonalStateController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\PersonalState\Controller\PersonalStateController" class="App\PersonalState\Controller\PersonalStateController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\PersonalState\Controller\PersonalStateController.0.App\PersonalState\Controller\PersonalStateController" class="App\PersonalState\Controller\PersonalStateController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\PersonalState\Controller\PersonalStateController" class="App\PersonalState\Controller\PersonalStateController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Reminder\Application\Command\SendDueReminderEmailsCommand.0.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Reminder\Application\Command\SendDueReminderEmailsCommand" class="App\Reminder\Application\Command\SendDueReminderEmailsCommand" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4457,6 +4972,10 @@
     <service id=".abstract.instanceof.App\Reminder\Controller\ReminderController" class="App\Reminder\Controller\ReminderController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Reminder\Infrastructure\Persistence\ReminderEntity.0.App\Reminder\Infrastructure\Persistence\ReminderEntity" class="App\Reminder\Infrastructure\Persistence\ReminderEntity" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Reminder\Infrastructure\Persistence\ReminderEntity" class="App\Reminder\Infrastructure\Persistence\ReminderEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Statistic\Controller\StatisticController" class="App\Statistic\Controller\StatisticController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Statistic\Controller\StatisticController" class="App\Statistic\Controller\StatisticController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Statistic\Controller\StatisticController.0.App\Statistic\Controller\StatisticController" class="App\Statistic\Controller\StatisticController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Statistic\Controller\StatisticController" class="App\Statistic\Controller\StatisticController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Task\Controller\TaskController.0.App\Task\Controller\TaskController" class="App\Task\Controller\TaskController" autowire="true" abstract="true"/>
@@ -4467,6 +4986,14 @@
     <service id=".abstract.instanceof.App\Task\Infrastructure\Persistence\TaskEntity" class="App\Task\Infrastructure\Persistence\TaskEntity" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Task\Infrastructure\Repository\TaskRepository" class="App\Task\Infrastructure\Repository\TaskRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Telegram\Controller\TelegramController" class="App\Telegram\Controller\TelegramController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Telegram\Controller\TelegramController" class="App\Telegram\Controller\TelegramController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Telegram\Controller\TelegramController.0.App\Telegram\Controller\TelegramController" class="App\Telegram\Controller\TelegramController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Telegram\Controller\TelegramController" class="App\Telegram\Controller\TelegramController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity.0.App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" class="App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" class="App\Telegram\Infrastructure\Persistence\TelegramLinkTokenEntity" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" class="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" class="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\User\Controller\UserController.0.App\User\Controller\UserController" class="App\User\Controller\UserController" autowire="true" abstract="true"/>
@@ -5187,11 +5714,17 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.iAk.GjW" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.jsJIHer" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Auth\Infrastructure\Repository\RefreshTokenRepository" type="service_closure" id="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
+        <argument key="App\Finance\Infrastructure\Repository\FinanceRepository" type="service_closure" id="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+        <argument key="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository" type="service_closure" id="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository"/>
+        <argument key="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository" type="service_closure" id="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository"/>
+        <argument key="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository" type="service_closure" id="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository"/>
+        <argument key="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository" type="service_closure" id="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository"/>
         <argument key="App\Task\Infrastructure\Repository\TaskRepository" type="service_closure" id="App\Task\Infrastructure\Repository\TaskRepository"/>
+        <argument key="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository" type="service_closure" id="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository"/>
         <argument key="App\User\Infrastructure\Repository\UserRepository" type="service_closure" id="App\User\Infrastructure\Repository\UserRepository"/>
       </argument>
     </service>
@@ -5260,6 +5793,24 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
+    <service id=".service_locator.TJNRSaV.App\Finance\Controller\FinanceController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Finance\Controller\FinanceController"/>
+      <argument>App\Finance\Controller\FinanceController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\FinanceCategory\Controller\FinanceCategoryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\FinanceCategory\Controller\FinanceCategoryController"/>
+      <argument>App\FinanceCategory\Controller\FinanceCategoryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\FinancePlan\Controller\FinancePlanController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\FinancePlan\Controller\FinancePlanController"/>
+      <argument>App\FinancePlan\Controller\FinancePlanController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
     <service id=".service_locator.TJNRSaV.App\Goal\Controller\GoalController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Goal\Controller\GoalController"/>
       <argument>App\Goal\Controller\GoalController</argument>
@@ -5272,15 +5823,45 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
+    <service id=".service_locator.TJNRSaV.App\HealthMetricEntry\Controller\HealthMetricEntryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\HealthMetricEntry\Controller\HealthMetricEntryController"/>
+      <argument>App\HealthMetricEntry\Controller\HealthMetricEntryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\HealthMetricType\Controller\HealthMetricTypeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\HealthMetricType\Controller\HealthMetricTypeController"/>
+      <argument>App\HealthMetricType\Controller\HealthMetricTypeController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\PersonalState\Controller\PersonalStateController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\PersonalState\Controller\PersonalStateController"/>
+      <argument>App\PersonalState\Controller\PersonalStateController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
     <service id=".service_locator.TJNRSaV.App\Reminder\Controller\ReminderController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Reminder\Controller\ReminderController"/>
       <argument>App\Reminder\Controller\ReminderController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
+    <service id=".service_locator.TJNRSaV.App\Statistic\Controller\StatisticController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Statistic\Controller\StatisticController"/>
+      <argument>App\Statistic\Controller\StatisticController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
     <service id=".service_locator.TJNRSaV.App\Task\Controller\TaskController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Task\Controller\TaskController"/>
       <argument>App\Task\Controller\TaskController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Telegram\Controller\TelegramController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Telegram\Controller\TelegramController"/>
+      <argument>App\Telegram\Controller\TelegramController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TJNRSaV" method="withContext"/>
     </service>
@@ -5424,10 +6005,18 @@
           <argument>App\Auth\Controller\RefreshTokenController</argument>
           <argument>App\Auth\Controller\RegisterController</argument>
           <argument>App\Category\Controller\CategoryController</argument>
+          <argument>App\Finance\Controller\FinanceController</argument>
+          <argument>App\FinanceCategory\Controller\FinanceCategoryController</argument>
+          <argument>App\FinancePlan\Controller\FinancePlanController</argument>
           <argument>App\Goal\Controller\GoalController</argument>
           <argument>App\Habit\Controller\HabitController</argument>
+          <argument>App\HealthMetricEntry\Controller\HealthMetricEntryController</argument>
+          <argument>App\HealthMetricType\Controller\HealthMetricTypeController</argument>
+          <argument>App\PersonalState\Controller\PersonalStateController</argument>
           <argument>App\Reminder\Controller\ReminderController</argument>
+          <argument>App\Statistic\Controller\StatisticController</argument>
           <argument>App\Task\Controller\TaskController</argument>
+          <argument>App\Telegram\Controller\TelegramController</argument>
           <argument>App\User\Controller\UserController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -5499,6 +6088,30 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
         <argument>App\Reminder\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\FinanceCategory\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Finance\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\FinancePlan\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\HealthMetricType\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\HealthMetricEntry\Infrastructure\Persistence</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_attribute_metadata_driver"/>
+        <argument>App\Telegram\Infrastructure\Persistence</argument>
       </call>
     </service>
     <service id=".errored..service_locator.1vYpZ1B.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
@@ -6282,14 +6895,27 @@
     <service id="App\Auth\Domain\Repository\RefreshTokenRepositoryInterface" alias="App\Auth\Infrastructure\Repository\RefreshTokenRepository"/>
     <service id="App\Category\Domain\Repository\CategoryRepositoryInterface" alias="App\Category\Infrastructure\Repository\CategoryRepository"/>
     <service id="App\Category\Domain\Service\CategoryServiceInterface" alias="App\Category\Application\Service\CategoryService"/>
+    <service id="App\Finance\Domain\Repository\FinanceRepositoryInterface" alias="App\Finance\Infrastructure\Repository\FinanceRepository"/>
+    <service id="App\Finance\Domain\Service\FinanceServiceInterface" alias="App\Finance\Application\Service\FinanceService"/>
+    <service id="App\FinanceCategory\Domain\Repository\FinanceCategoryRepositoryInterface" alias="App\FinanceCategory\Infrastructure\Repository\FinanceCategoryRepository"/>
+    <service id="App\FinanceCategory\Domain\Service\FinanceCategoryServiceInterface" alias="App\FinanceCategory\Application\Service\FinanceCategoryService"/>
+    <service id="App\FinancePlan\Domain\Repository\FinancePlanRepositoryInterface" alias="App\FinancePlan\Infrastructure\Repository\FinancePlanRepository"/>
+    <service id="App\FinancePlan\Domain\Service\FinancePlanServiceInterface" alias="App\FinancePlan\Application\Service\FinancePlanService"/>
     <service id="App\Goal\Domain\Repository\GoalRepositoryInterface" alias="App\Goal\Infrastructure\Repository\GoalRepository"/>
     <service id="App\Goal\Domain\Service\GoalServiceInterface" alias="App\Goal\Application\Service\GoalService"/>
     <service id="App\Habit\Domain\Repository\HabitRepositoryInterface" alias="App\Habit\Infrastructure\Repository\HabitRepository"/>
     <service id="App\Habit\Domain\Service\HabitServiceInterface" alias="App\Habit\Application\Service\HabitService"/>
+    <service id="App\HealthMetricEntry\Domain\Repository\HealthMetricEntryRepositoryInterface" alias="App\HealthMetricEntry\Infrastructure\Repository\HealthMetricEntryRepository"/>
+    <service id="App\HealthMetricEntry\Domain\Service\HealthMetricEntryServiceInterface" alias="App\HealthMetricEntry\Application\Service\HealthMetricEntryService"/>
+    <service id="App\HealthMetricType\Domain\Repository\HealthMetricTypeRepositoryInterface" alias="App\HealthMetricType\Infrastructure\Repository\HealthMetricTypeRepository"/>
+    <service id="App\HealthMetricType\Domain\Service\HealthMetricTypeServiceInterface" alias="App\HealthMetricType\Application\Service\HealthMetricTypeService"/>
+    <service id="App\PersonalState\Domain\Service\PersonalStateServiceInterface" alias="App\PersonalState\Application\Service\PersonalStateService"/>
     <service id="App\Reminder\Domain\Repository\ReminderRepositoryInterface" alias="App\Reminder\Infrastructure\Repository\ReminderRepository"/>
     <service id="App\Reminder\Domain\Service\ReminderServiceInterface" alias="App\Reminder\Application\Service\ReminderService"/>
+    <service id="App\Statistic\Domain\Service\StatisticServiceInterface" alias="App\Statistic\Application\Service\StatisticService"/>
     <service id="App\Task\Domain\Repository\TaskRepositoryInterface" alias="App\Task\Infrastructure\Repository\TaskRepository"/>
     <service id="App\Task\Domain\Service\TaskServiceInterface" alias="App\Task\Application\Service\TaskService"/>
+    <service id="App\Telegram\Domain\Repository\TelegramLinkTokenRepositoryInterface" alias="App\Telegram\Infrastructure\Repository\TelegramLinkTokenRepository"/>
     <service id="App\User\Domain\Repository\UserRepositoryInterface" alias="App\User\Infrastructure\Repository\UserRepository"/>
     <service id="App\User\Domain\Service\UserServiceInterface" alias="App\User\Application\Service\UserService"/>
     <service id="App\Kernel" alias="kernel" public="true"/>
@@ -6391,7 +7017,7 @@
     <service id="security.user_checker.login" alias="security.user_checker"/>
     <service id="security.authentication.session_strategy.api" alias="security.authentication.session_strategy_noop"/>
     <service id="security.user_checker.api" alias="security.user_checker"/>
-    <service id="security.firewall.context_locator" alias=".service_locator.5v0e_5m"/>
+    <service id="security.firewall.context_locator" alias=".service_locator.tnAxedV"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface" alias="lexik_jwt_authentication.jwt_manager"/>
     <service id="Lexik\Bundle\JWTAuthenticationBundle\Services\JWSProvider\JWSProviderInterface" alias="lexik_jwt_authentication.jws_provider.lcobucci"/>

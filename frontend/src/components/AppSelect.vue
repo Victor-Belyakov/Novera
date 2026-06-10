@@ -34,7 +34,7 @@
           v-for="opt in options"
           :key="opt.value === undefined ? opt.label : opt.value"
           class="px-4 py-2.5 cursor-pointer text-gray-900 hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg"
-          :class="{ 'bg-blue-50 text-blue-950': isSelected(opt) }"
+          :class="{ 'bg-blue-50 text-blue-700': isSelected(opt) }"
           @click="choose(opt)"
         >
           {{ opt.label }}

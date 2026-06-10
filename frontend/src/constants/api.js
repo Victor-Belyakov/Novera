@@ -5,8 +5,16 @@ export const API_ENDPOINTS = {
     LOGOUT: '/api/auth/logout',
     REFRESH: '/api/auth/refresh',
   },
+  TELEGRAM: {
+    CONNECT_LINK: '/api/telegram/connect-link',
+    AUTH: '/api/telegram/auth',
+    CONFIG: '/api/telegram/config',
+  },
   USER: {
     GET_CURRENT: '/api/user',
+  },
+  PERSONAL_STATE: {
+    GET: '/api/personal-state',
   },
   USERS: {
     LIST: '/api/users',
@@ -16,6 +24,29 @@ export const API_ENDPOINTS = {
     CREATE: '/api/tasks',
     updateUrl: (id) => `/api/tasks/${id}`,
     getUrl: (id) => `/api/tasks/${id}`,
+  },
+  FINANCES: {
+    LIST: '/api/finances',
+    CREATE: '/api/finances',
+    updateUrl: (id) => `/api/finances/${id}`,
+  },
+  FINANCE_PLANS: {
+    LIST: '/api/finance-plans',
+    CREATE: '/api/finance-plans',
+    SUMMARY: '/api/finance-plans/summary',
+  },
+  FINANCE_CATEGORIES: {
+    LIST: '/api/finance-categories',
+    CREATE: '/api/finance-categories',
+  },
+  HEALTH_METRIC_TYPES: {
+    LIST: '/api/health-metric-types',
+    ACTIVE_LIST: '/api/health-metric-types?active_only=true',
+    CREATE: '/api/health-metric-types',
+  },
+  HEALTH_METRICS: {
+    LIST: '/api/health-metrics',
+    CREATE: '/api/health-metrics',
   },
   CATEGORIES: {
     LIST: '/api/categories',
@@ -32,6 +63,9 @@ export const API_ENDPOINTS = {
     logsUrl: (id) => `/api/habits/${id}/logs`,
     addLogUrl: (id) => `/api/habits/${id}/log`,
     skipLogUrl: (id) => `/api/habits/${id}/logs/skip`,
+  },
+  STATISTICS: {
+    LIST: '/api/statistics',
   },
   REMINDERS: {
     LIST: '/api/reminders',
@@ -55,6 +89,3 @@ export const NOTIFICATION_TYPES = {
 }
 
 export const NOTIFICATION_DURATION = 5000 // 5 seconds
-
-
-

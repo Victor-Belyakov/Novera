@@ -54,7 +54,7 @@
 
         <button
           type="submit"
-          class="bg-blue-950 text-white py-2 rounded-md font-semibold hover:bg-blue-900 transition cursor-pointer"
+          class="app-btn-primary py-2 rounded-md font-semibold transition cursor-pointer"
         >
           {{ isRegisterMode ? 'Зарегистрироваться' : 'Войти' }}
         </button>

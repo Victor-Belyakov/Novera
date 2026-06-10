@@ -3,6 +3,7 @@
 namespace App\Task\Domain\Repository;
 
 use App\Task\Infrastructure\Persistence\TaskEntity;
+use App\User\Infrastructure\Persistence\UserEntity;
 
 interface TaskRepositoryInterface
 {
@@ -12,6 +13,11 @@ interface TaskRepositoryInterface
      * @return TaskEntity[]
      */
     public function findAllNotDeleted(): array;
+
+    /**
+     * @return TaskEntity[]
+     */
+    public function findAllByUser(UserEntity $user): array;
 
     public function save(TaskEntity $task): void;
 

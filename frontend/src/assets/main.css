@@ -19,3 +19,25 @@ html, body {
   width: 100%;
 }
 
+.app-btn-primary {
+  background: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgb(22 163 74 / 0.22);
+}
+
+.app-btn-primary:hover {
+  background: #15803d;
+}
+
+.app-btn-primary:disabled {
+  box-shadow: none;
+}
+
+.app-btn-ghost {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.app-btn-ghost:hover {
+  background: #d1d5db;
+}

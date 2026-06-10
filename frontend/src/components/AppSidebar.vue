@@ -28,7 +28,7 @@
               v-for="child in item.children"
               :key="child.name"
               class="flex items-center gap-3 w-full py-2 pl-11 pr-3 rounded-lg text-sm font-medium transition-colors cursor-pointer"
-              :class="isChildItemActive(child) ? 'sidebar-item--active bg-white text-blue-950 shadow-sm ring-1 ring-blue-950/10' : 'text-white/90 hover:bg-white hover:text-blue-950'"
+              :class="isChildItemActive(child) ? 'sidebar-item--active bg-white text-blue-950 shadow-sm ring-1 ring-blue-950/10' : 'text-white/90 hover:bg-white hover:text-gray-600'"
               @click="$emit('updateActive', child.name)"
             >
               <component :is="getIconComponent(child.icon || 'menu')" class="w-5 h-5 shrink-0 opacity-90" />
@@ -94,6 +94,3 @@ function toggleParentExpand(parentName) {
   expandedParents.value = next
 }
 </script>
-
-
-

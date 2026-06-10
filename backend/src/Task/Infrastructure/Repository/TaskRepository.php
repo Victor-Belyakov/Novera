@@ -4,6 +4,7 @@ namespace App\Task\Infrastructure\Repository;
 
 use App\Task\Domain\Repository\TaskRepositoryInterface;
 use App\Task\Infrastructure\Persistence\TaskEntity;
+use App\User\Infrastructure\Persistence\UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -29,6 +30,21 @@ class TaskRepository extends ServiceEntityRepository implements TaskRepositoryIn
         return $this->createQueryBuilder('t')
             ->leftJoin('t.goal', 'g')->addSelect('g')
             ->where('t.deletedAt IS NULL')
+            ->orderBy('t.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return TaskEntity[]
+     */
+    public function findAllByUser(UserEntity $user): array
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.goal', 'g')->addSelect('g')
+            ->where('t.deletedAt IS NULL')
+            ->andWhere('(t.createdBy = :user OR t.assignee = :user)')
+            ->setParameter('user', $user)
             ->orderBy('t.createdAt', 'DESC')
             ->getQuery()
             ->getResult();

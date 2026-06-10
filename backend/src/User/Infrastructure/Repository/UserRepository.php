@@ -24,6 +24,13 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         return $result instanceof UserEntity ? $result : null;
     }
 
+    public function findByTelegramId(string $telegramId): ?UserEntity
+    {
+        $result = $this->findOneBy(['telegramId' => $telegramId]);
+
+        return $result instanceof UserEntity ? $result : null;
+    }
+
     /**
      * @param UserEntity $user
      * @return void

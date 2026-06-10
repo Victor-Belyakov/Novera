@@ -51,20 +51,20 @@ const { notifications, removeNotification } = useNotifications()
 const getNotificationClasses = (type) => {
   const baseClasses = 'border-l-4'
   const typeClasses = {
-    [NOTIFICATION_TYPES.SUCCESS]: 'bg-green-50 border-green-500 text-green-800',
+    [NOTIFICATION_TYPES.SUCCESS]: 'bg-blue-50 border-blue-300 text-blue-800',
     [NOTIFICATION_TYPES.ERROR]: 'bg-red-50 border-red-500 text-red-800',
     [NOTIFICATION_TYPES.WARNING]: 'bg-yellow-50 border-yellow-500 text-yellow-800',
-    [NOTIFICATION_TYPES.INFO]: 'bg-blue-50 border-blue-950 text-blue-900',
+    [NOTIFICATION_TYPES.INFO]: 'bg-blue-50 border-blue-400 text-blue-900',
   }
   return `${baseClasses} ${typeClasses[type] || typeClasses[NOTIFICATION_TYPES.INFO]}`
 }
 
 const getIconClasses = (type) => {
   const typeClasses = {
-    [NOTIFICATION_TYPES.SUCCESS]: 'text-green-500',
+    [NOTIFICATION_TYPES.SUCCESS]: 'text-blue-500',
     [NOTIFICATION_TYPES.ERROR]: 'text-red-500',
     [NOTIFICATION_TYPES.WARNING]: 'text-yellow-500',
-    [NOTIFICATION_TYPES.INFO]: 'text-blue-950',
+    [NOTIFICATION_TYPES.INFO]: 'text-blue-700',
   }
   return typeClasses[type] || typeClasses[NOTIFICATION_TYPES.INFO]
 }

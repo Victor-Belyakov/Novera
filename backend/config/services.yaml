@@ -31,5 +31,11 @@ services:
     App\Reminder\Application\Service\ReminderDueEmailSender:
         arguments:
             $mailerFrom: '%env(MAILER_FROM)%'
+
+    App\Telegram\Application\Service\TelegramService:
+        arguments:
+            $telegramBotToken: '%env(default::TELEGRAM_BOT_TOKEN)%'
+            $telegramBotUsername: '%env(default::TELEGRAM_BOT_USERNAME)%'
+            $telegramMiniAppUrl: '%env(default::TELEGRAM_MINI_APP_URL)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

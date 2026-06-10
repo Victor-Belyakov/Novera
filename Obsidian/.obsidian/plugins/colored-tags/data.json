@@ -1,0 +1,29 @@
+{
+  "palette": {
+    "seed": 0,
+    "selected": "adaptive-soft",
+    "custom": "e12729-f37324-f8cc1b-72b043-007f4e"
+  },
+  "mixColors": true,
+  "transition": true,
+  "accessibility": {
+    "highTextContrast": false
+  },
+  "knownTags": {
+    "board": 5,
+    "commands": 2,
+    "dashboard": 6,
+    "goals": 7,
+    "kanban": 8,
+    "may": 9,
+    "month": 10,
+    "planning": 11,
+    "routine": 12,
+    "schedule": 13,
+    "sport": 4,
+    "track": 14,
+    "week": 15
+  },
+  "tagColors": {},
+  "_version": 4
+}

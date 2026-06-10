@@ -4,7 +4,7 @@
       <button
         type="button"
         @click="openAddModal"
-        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
+        class="px-4 py-2 app-btn-primary rounded-md transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
       >
         <span class="text-lg leading-none">+</span>
         Добавить
@@ -98,7 +98,7 @@
                   type="checkbox"
                   :checked="g.completed === true"
                   :disabled="togglingId === g.id"
-                  class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
+                  class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-300 cursor-pointer"
                   @change="toggleCompleted(g)"
                 />
                 <span class="text-sm text-gray-600">Выполнена</span>
@@ -155,12 +155,12 @@
         @click.self="closeAddModal"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0">
-            <h3 class="text-lg font-semibold text-white">Новая цель</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 app-modal-header">
+            <h3 class="text-lg font-semibold">Новая цель</h3>
             <button
               type="button"
               @click="closeAddModal"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer"
               aria-label="Закрыть"
             >
               ✕
@@ -207,7 +207,7 @@
               <button
                 type="submit"
                 :disabled="saving"
-                class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium shadow-sm transition"
+                class="px-5 py-2.5 app-btn-primary rounded-lg disabled:opacity-50 text-sm font-medium transition"
               >
                 {{ saving ? 'Сохранение...' : 'Создать' }}
               </button>

@@ -11,6 +11,21 @@ security:
                 property: email
 
     firewalls:
+        telegram_webhook:
+            pattern: ^/api/telegram/webhook
+            stateless: true
+            security: false
+
+        telegram_auth:
+            pattern: ^/api/telegram/auth
+            stateless: true
+            security: false
+
+        telegram_config:
+            pattern: ^/api/telegram/config
+            stateless: true
+            security: false
+
         login:
             pattern: ^/api/auth/login
             stateless: true
@@ -40,6 +55,9 @@ security:
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/telegram/auth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/telegram/webhook, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/telegram/config, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
     role_hierarchy:

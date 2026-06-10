@@ -4,7 +4,7 @@
       <button
         type="button"
         @click="openAddModal"
-        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
+        class="px-4 py-2 app-btn-primary rounded-md transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
       >
         <span class="text-lg leading-none">+</span>
         Добавить
@@ -51,12 +51,12 @@
         @click.self="closeAddModal"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden border border-gray-100 flex flex-col">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0">
-            <h3 class="text-lg font-semibold text-white">Новая категория</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 app-modal-header">
+            <h3 class="text-lg font-semibold">Новая категория</h3>
             <button
               type="button"
               @click="closeAddModal"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer"
               aria-label="Закрыть"
             >
               ✕
@@ -77,7 +77,7 @@
               <button
                 type="submit"
                 :disabled="saving"
-                class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium shadow-sm transition"
+                class="px-5 py-2.5 app-btn-primary rounded-lg disabled:opacity-50 text-sm font-medium transition"
               >
                 {{ saving ? 'Сохранение...' : 'Создать' }}
               </button>

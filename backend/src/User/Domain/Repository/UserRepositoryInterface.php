@@ -8,6 +8,8 @@ interface UserRepositoryInterface
 {
     public function findById(int $id): ?UserEntity;
 
+    public function findByTelegramId(string $telegramId): ?UserEntity;
+
     /**
      * @param UserEntity $user
      * @return void

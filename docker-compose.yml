@@ -13,6 +13,8 @@ services:
       - database
     networks:
       - novera_network
+    ports:
+      - "127.0.0.1:9000:9000"
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}?serverVersion=${POSTGRES_VERSION}&charset=utf8
     extra_hosts:
@@ -30,6 +32,8 @@ services:
       - php
     networks:
       - novera_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   frontend:
     build:
@@ -43,6 +47,8 @@ services:
         condition: service_started
     networks:
       - novera_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
   database:

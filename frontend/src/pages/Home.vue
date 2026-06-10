@@ -28,9 +28,13 @@ import UserContent from './Home/UserContent.vue'
 import SettingsContent from './Home/SettingsContent.vue'
 import UsersContent from './Home/UsersContent.vue'
 import TasksContent from './Home/TasksContent.vue'
+import FinanceContent from './Home/FinanceContent.vue'
+import HealthContent from './Home/HealthContent.vue'
 import GoalsContent from './Home/GoalsContent.vue'
 import HabitsContent from './Home/HabitsContent.vue'
 import CategoriesContent from './Home/CategoriesContent.vue'
+import FinanceCategoriesContent from './Home/FinanceCategoriesContent.vue'
+import HealthMetricTypesContent from './Home/HealthMetricTypesContent.vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
 import { MENU_ITEMS } from '@/constants/menu'
@@ -46,9 +50,13 @@ const pathToMenu = {
   [ROUTES.USER]: 'profile',
   [ROUTES.USERS]: 'users',
   [ROUTES.TASKS]: 'tasks',
+  [ROUTES.FINANCES]: 'finances',
+  [ROUTES.HEALTH]: 'health',
   [ROUTES.GOALS]: 'goals',
   [ROUTES.HABITS]: 'habits',
   [ROUTES.SETTINGS_CATEGORIES]: 'settings-categories',
+  [ROUTES.SETTINGS_FINANCE_CATEGORIES]: 'settings-finance-categories',
+  [ROUTES.SETTINGS_HEALTH_METRICS]: 'settings-health-metrics',
   [ROUTES.SETTINGS]: 'settings',
 }
 const activeMenu = computed(() => pathToMenu[route.path] ?? 'home')
@@ -87,10 +95,14 @@ const components = {
   profile: UserContent,
   users: UsersContent,
   tasks: TasksContent,
+  finances: FinanceContent,
+  health: HealthContent,
   goals: GoalsContent,
   habits: HabitsContent,
   settings: SettingsContent,
   'settings-categories': CategoriesContent,
+  'settings-finance-categories': FinanceCategoriesContent,
+  'settings-health-metrics': HealthMetricTypesContent,
 }
 
 // Текущий компонент на основе activeMenu
@@ -109,10 +121,14 @@ const pageTitle = computed(() => {
     profile: 'Пользователь',
     users: 'Пользователи',
     tasks: 'Задачи',
+    finances: 'Финансы',
+    health: 'Здоровье',
     goals: 'Цели',
     habits: 'Привычки',
     settings: 'Настройки',
     'settings-categories': 'Категории',
+    'settings-finance-categories': 'Категории финансов',
+    'settings-health-metrics': 'Метрики здоровья',
   }
   return titles[activeMenu.value] || 'Главная'
 })

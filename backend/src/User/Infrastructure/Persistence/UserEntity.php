@@ -28,7 +28,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    #[ORM\Column(type: 'string', length: 32, nullable: true, unique: true)]
     private ?string $telegramId = null;
 
     #[ORM\Column(type: 'json')]

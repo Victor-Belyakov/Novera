@@ -63,10 +63,6 @@ readonly class UserService implements UserServiceInterface
         if ($dto->date_of_birth !== null) {
             $user->setDateOfBirth(new DateTimeImmutable($dto->date_of_birth));
         }
-        if ($dto->telegram_id !== null) {
-            $user->setTelegramId($dto->telegram_id === '' ? null : $dto->telegram_id);
-        }
-
         $this->repository->save($user);
 
         return $this->userToDto($user);

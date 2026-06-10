@@ -57,7 +57,7 @@
             <button
               type="button"
               @click.stop="goToToday"
-              class="ml-1 px-2 py-1 text-xs rounded-md bg-blue-950 text-white hover:bg-blue-900 transition-colors"
+              class="ml-1 px-2 py-1 text-xs rounded-md app-btn-primary transition-colors"
               title="Сегодня"
             >
               Сегодня
@@ -80,8 +80,8 @@
             @click="selectDate(day)"
             :class="[
               'flex items-center justify-center rounded-md cursor-pointer transition-colors text-sm font-medium min-h-[2rem]',
-              isToday(day) ? 'bg-blue-950 text-white' : '',
-              isSelected(day) && !isToday(day) ? 'bg-blue-100 text-blue-950' : '',
+              isToday(day) ? 'bg-blue-300 text-blue-950' : '',
+              isSelected(day) && !isToday(day) ? 'bg-blue-100 text-blue-700' : '',
               !isToday(day) && !isSelected(day) ? 'hover:bg-gray-100 text-gray-900' : ''
             ]"
           >
@@ -110,7 +110,7 @@
           <button
             type="button"
             @click="applyTime"
-            class="ml-1 px-2 py-1.5 text-xs rounded-md bg-blue-950 text-white hover:bg-blue-900 transition-colors"
+            class="ml-1 px-2 py-1.5 text-xs rounded-md app-btn-primary transition-colors"
           >
             OK
           </button>

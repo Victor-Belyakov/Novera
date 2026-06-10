@@ -49,6 +49,36 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Reminder/Infrastructure/Persistence'
                 prefix: 'App\Reminder\Infrastructure\Persistence'
+            FinanceCategory:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/FinanceCategory/Infrastructure/Persistence'
+                prefix: 'App\FinanceCategory\Infrastructure\Persistence'
+            Finance:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Finance/Infrastructure/Persistence'
+                prefix: 'App\Finance\Infrastructure\Persistence'
+            FinancePlan:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/FinancePlan/Infrastructure/Persistence'
+                prefix: 'App\FinancePlan\Infrastructure\Persistence'
+            HealthMetricType:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/HealthMetricType/Infrastructure/Persistence'
+                prefix: 'App\HealthMetricType\Infrastructure\Persistence'
+            HealthMetricEntry:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/HealthMetricEntry/Infrastructure/Persistence'
+                prefix: 'App\HealthMetricEntry\Infrastructure\Persistence'
+            Telegram:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Telegram/Infrastructure/Persistence'
+                prefix: 'App\Telegram\Infrastructure\Persistence'
         controller_resolver:
             auto_mapping: false
 

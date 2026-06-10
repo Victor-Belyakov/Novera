@@ -23,7 +23,7 @@
         </button>
         <button
           @click="goToToday"
-          class="px-3 py-1.5 text-sm rounded-md bg-blue-950 text-white hover:bg-blue-900 transition-colors"
+          class="px-3 py-1.5 text-sm rounded-md app-btn-primary transition-colors"
           title="Сегодня"
         >
           Сегодня
@@ -54,8 +54,8 @@
         @click="selectDate(day)"
         :class="[
           'flex flex-col rounded-md cursor-pointer transition-colors overflow-hidden min-h-[4rem]',
-          isToday(day) ? 'bg-blue-950 text-white' : '',
-          isSelected(day) && !isToday(day) ? 'bg-blue-100 text-blue-950' : '',
+          isToday(day) ? 'bg-blue-300 text-blue-950' : '',
+          isSelected(day) && !isToday(day) ? 'bg-blue-100 text-blue-700' : '',
           !isToday(day) && !isSelected(day) ? 'hover:bg-gray-100 text-gray-900' : '',
         ]"
       >
@@ -65,7 +65,7 @@
             v-for="task in getTasksForDay(day)"
             :key="task.id"
             class="text-xs truncate rounded px-1 py-0.5"
-            :class="isToday(day) ? 'bg-white/20 text-white' : 'bg-blue-950 text-blue-100'"
+            :class="isToday(day) ? 'bg-white/60 text-blue-900' : 'bg-blue-100 text-blue-700'"
             :title="task.title"
           >
             {{ task.title }}
@@ -176,4 +176,3 @@ const goToToday = () => {
 
 const emit = defineEmits(['date-selected'])
 </script>
-

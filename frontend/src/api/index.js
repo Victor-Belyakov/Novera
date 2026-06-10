@@ -1,7 +1,7 @@
 import { STORAGE_KEYS, API_ENDPOINTS } from '@/constants/api'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
-const PUBLIC_ENDPOINTS = ['/auth/login', '/auth/register']
+const PUBLIC_ENDPOINTS = ['/auth/login', '/auth/register', '/telegram/auth', '/telegram/config']
 
 // Флаг для предотвращения множественных попыток обновления токена
 let isRefreshing = false
@@ -284,4 +284,3 @@ export const handleResponse = async (response) => {
     )
   }
 }
-

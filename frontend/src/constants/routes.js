@@ -4,10 +4,14 @@ export const ROUTES = {
   USER: '/user',
   USERS: '/users',
   TASKS: '/tasks',
+  FINANCES: '/finances',
+  HEALTH: '/health',
   GOALS: '/goals',
   HABITS: '/habits',
   SETTINGS: '/settings',
   SETTINGS_CATEGORIES: '/settings/categories',
+  SETTINGS_FINANCE_CATEGORIES: '/settings/finance-categories',
+  SETTINGS_HEALTH_METRICS: '/settings/health-metrics',
 }
 
 export const ROUTE_NAMES = {
@@ -16,11 +20,12 @@ export const ROUTE_NAMES = {
   USER: 'User',
   USERS: 'Users',
   TASKS: 'Tasks',
+  FINANCES: 'Finances',
+  HEALTH: 'Health',
   GOALS: 'Goals',
   HABITS: 'Habits',
   SETTINGS: 'Settings',
   SETTINGS_CATEGORIES: 'SettingsCategories',
+  SETTINGS_FINANCE_CATEGORIES: 'SettingsFinanceCategories',
+  SETTINGS_HEALTH_METRICS: 'SettingsHealthMetrics',
 }
-
-
-

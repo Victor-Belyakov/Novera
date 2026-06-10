@@ -35,6 +35,46 @@ reminder_controllers:
     type: attribute
     prefix: /api
 
+statistic_controllers:
+    resource: '../src/Statistic/Controller/'
+    type: attribute
+    prefix: /api
+
+finance_category_controllers:
+    resource: '../src/FinanceCategory/Controller/'
+    type: attribute
+    prefix: /api
+
+finance_controllers:
+    resource: '../src/Finance/Controller/'
+    type: attribute
+    prefix: /api
+
+finance_plan_controllers:
+    resource: '../src/FinancePlan/Controller/'
+    type: attribute
+    prefix: /api
+
+personal_state_controllers:
+    resource: '../src/PersonalState/Controller/'
+    type: attribute
+    prefix: /api
+
+health_metric_type_controllers:
+    resource: '../src/HealthMetricType/Controller/'
+    type: attribute
+    prefix: /api
+
+health_metric_entry_controllers:
+    resource: '../src/HealthMetricEntry/Controller/'
+    type: attribute
+    prefix: /api
+
+telegram_controllers:
+    resource: '../src/Telegram/Controller/'
+    type: attribute
+    prefix: /api
+
 # Явно добавляем login_check для firewall json_login
 login_check:
     path: /api/auth/login

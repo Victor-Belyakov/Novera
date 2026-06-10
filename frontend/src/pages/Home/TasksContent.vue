@@ -5,7 +5,7 @@
       <button
         type="button"
         @click="openAddModal"
-        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
+        class="px-4 py-2 app-btn-primary rounded-md transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
       >
         <span class="text-lg leading-none">+</span>
         Добавить
@@ -76,12 +76,12 @@
         @click.self="closeAddModal"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden border border-gray-100 flex flex-col">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0 overflow-hidden">
-            <h3 class="text-lg font-semibold text-white">Новая задача</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 overflow-hidden app-modal-header">
+            <h3 class="text-lg font-semibold">Новая задача</h3>
             <button
               type="button"
               @click="closeAddModal"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer"
               aria-label="Закрыть"
             >
               ✕
@@ -142,7 +142,7 @@
               <button
                 type="submit"
                 :disabled="saving"
-                class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium shadow-sm transition"
+                class="px-5 py-2.5 app-btn-primary rounded-lg disabled:opacity-50 text-sm font-medium transition"
               >
                 {{ saving ? 'Сохранение...' : 'Создать' }}
               </button>
@@ -169,12 +169,12 @@
         @click.self="viewTask = null"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden border border-gray-100 flex flex-col">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0 overflow-hidden">
-            <h3 class="text-lg font-semibold text-white truncate pr-8">{{ viewTask.title }}</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 overflow-hidden app-modal-header">
+            <h3 class="text-lg font-semibold truncate pr-8">{{ viewTask.title }}</h3>
             <button
               type="button"
               @click="viewTask = null"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer shrink-0"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer shrink-0"
               aria-label="Закрыть"
             >
               ✕
@@ -223,7 +223,7 @@
               <button
                 type="button"
                 @click="openEditModal(viewTask)"
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition cursor-pointer"
+                class="px-4 py-2 app-btn-primary rounded-lg text-sm font-medium transition cursor-pointer"
               >
                 Редактировать
               </button>
@@ -241,12 +241,12 @@
         @click.self="closeEditModal"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden border border-gray-100 flex flex-col">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0 overflow-hidden">
-            <h3 class="text-lg font-semibold text-white">Редактирование задачи</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 overflow-hidden app-modal-header">
+            <h3 class="text-lg font-semibold">Редактирование задачи</h3>
             <button
               type="button"
               @click="closeEditModal"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer shrink-0"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer shrink-0"
               aria-label="Закрыть"
             >
               ✕
@@ -307,7 +307,7 @@
                 <button
                   type="submit"
                   :disabled="saving"
-                  class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium shadow-sm transition"
+                  class="px-5 py-2.5 app-btn-primary rounded-lg disabled:opacity-50 text-sm font-medium transition"
                 >
                   {{ saving ? 'Сохранение...' : 'Сохранить' }}
                 </button>
@@ -352,7 +352,7 @@
         </div>
         <div
           class="flex-1 p-3 overflow-y-auto min-h-[200px]"
-          :class="{ 'ring ring-blue-950/20 ring-inset': dragOverColumn === column.id }"
+          :class="{ 'ring ring-blue-300 ring-inset': dragOverColumn === column.id }"
           @dragover.prevent="dragOverColumn = column.id"
           @dragleave="dragOverColumn = null"
           @drop.prevent="onDrop($event, column.id)"
@@ -404,11 +404,11 @@ import AppDatePicker from '@/components/AppDatePicker.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 import IconBell from '@/components/icons/IconBell.vue'
 
-// Колонки канбана — соответствуют TaskStatusEnum на бэке. Цвета: Новая = серый, В работе = голубой, Выполнена = зеленый, Закрыта = красный
+// Колонки канбана — соответствуют TaskStatusEnum на бэке.
 const columns = [
   { id: 'new', label: 'Новая', headerClass: 'bg-gray-200 text-gray-800' },
-  { id: 'in_progress', label: 'В работе', headerClass: 'bg-sky-200 text-sky-900' },
-  { id: 'done', label: 'Выполнена', headerClass: 'bg-green-200 text-green-900' },
+  { id: 'in_progress', label: 'В работе', headerClass: 'bg-blue-100 text-blue-800' },
+  { id: 'done', label: 'Выполнена', headerClass: 'bg-blue-200 text-blue-900' },
   { id: 'closed', label: 'Закрыта', headerClass: 'bg-red-200 text-red-900' },
 ]
 

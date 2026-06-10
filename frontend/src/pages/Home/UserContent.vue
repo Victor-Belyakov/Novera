@@ -1,24 +1,24 @@
 <template>
   <div class="bg-white rounded-lg shadow-lg overflow-hidden">
     <!-- Заголовок с аватаром -->
-    <div class="bg-gradient-to-r from-blue-950 to-blue-800 px-8 py-12">
+    <div class="bg-gradient-to-r from-blue-100 via-blue-50 to-gray-100 px-8 py-12 border-b border-blue-100">
       <div class="flex items-center gap-6">
         <!-- Аватар -->
-        <div class="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+        <div class="w-24 h-24 rounded-full bg-white border-4 border-blue-200 flex items-center justify-center text-blue-700 text-4xl font-bold shadow-lg">
           {{ getInitials() }}
         </div>
 
         <!-- Информация о пользователе -->
-        <div class="text-white" v-if="user">
+        <div class="text-gray-800" v-if="user">
           <h2 class="text-3xl font-bold mb-1">
             {{ getUserFullName() }}
           </h2>
-          <p class="text-blue-100 text-lg">{{ user.email }}</p>
+          <p class="text-blue-600 text-lg">{{ user.email }}</p>
         </div>
 
-        <div v-else-if="loading" class="text-white flex items-center gap-3">
+        <div v-else-if="loading" class="text-gray-700 flex items-center gap-3">
           <AppSpinner size="sm" />
-          <span class="text-blue-100">Загрузка...</span>
+          <span class="text-blue-600">Загрузка...</span>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
         <p class="text-red-600 font-medium">{{ error }}</p>
         <button
           @click="loadUserData"
-          class="mt-4 px-4 py-2 bg-blue-950 text-white rounded-md hover:bg-blue-900 transition-colors"
+          class="mt-4 px-4 py-2 app-btn-primary rounded-md transition-colors"
         >
           Попробовать снова
         </button>
@@ -46,7 +46,7 @@
           <button
             v-if="!isEditing"
             @click="startEditing"
-            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-medium cursor-pointer"
+            class="px-4 py-2 app-btn-primary rounded-md transition-colors font-medium cursor-pointer"
           >
             Редактировать
           </button>
@@ -54,7 +54,7 @@
             <button
               @click="saveProfile"
               :disabled="saving"
-              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-medium disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+              class="px-4 py-2 app-btn-primary rounded-md transition-colors font-medium disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
             >
               {{ saving ? 'Сохранение...' : 'Сохранить' }}
             </button>
@@ -98,9 +98,18 @@
             <div class="text-sm text-gray-500 font-medium mb-2">Телефон</div>
             <div class="text-xl font-semibold text-gray-900">{{ formatPhoneMask(user.phone) || '—' }}</div>
           </div>
-          <div v-if="user.telegram_id" class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
-            <div class="text-sm text-gray-500 font-medium mb-2">Telegram ID</div>
-            <div class="text-xl font-semibold text-gray-900">{{ user.telegram_id }}</div>
+          <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 hover:border-blue-300 transition-colors">
+            <div class="text-sm text-gray-500 font-medium mb-2">Telegram</div>
+            <div class="text-xl font-semibold text-gray-900">{{ user.telegram_id ? 'Подключен' : 'Не подключен' }}</div>
+            <div v-if="user.telegram_id" class="text-sm text-gray-500 mt-2">ID: {{ user.telegram_id }}</div>
+            <button
+              type="button"
+              @click="connectTelegram"
+              :disabled="telegramLoading"
+              class="mt-4 px-4 py-2 app-btn-primary rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {{ telegramLoading ? 'Подготовка...' : (user.telegram_id ? 'Переподключить Telegram' : 'Подключить Telegram') }}
+            </button>
           </div>
         </div>
 
@@ -162,13 +171,11 @@
             />
           </div>
           <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
-            <label class="text-sm text-gray-500 font-medium mb-2 block">Telegram ID</label>
-            <input
-              v-model="editSnapshot.telegram_id"
-              type="text"
-              placeholder="Необязательно"
-              class="app-input"
-            />
+            <label class="text-sm text-gray-500 font-medium mb-2 block">Telegram</label>
+            <div class="text-gray-900 font-semibold">
+              {{ user.telegram_id ? 'Подключен' : 'Подключение через кнопку после сохранения' }}
+            </div>
+            <div v-if="user.telegram_id" class="text-sm text-gray-500 mt-2">ID: {{ user.telegram_id }}</div>
           </div>
         </form>
       </div>
@@ -178,19 +185,20 @@
 
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
-import { apiGet, apiPatch, handleResponse } from '@/api'
+import { apiGet, apiPatch, apiPost, handleResponse } from '@/api'
 import { API_ENDPOINTS } from '@/constants/api'
 import { useNotifications } from '@/composables/useNotifications'
 import AppDatePicker from '@/components/AppDatePicker.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 
-const { success: showSuccess, error: showError } = useNotifications()
+const { success: showSuccess, error: showError, info: showInfo } = useNotifications()
 
 const user = ref(null)
 const loading = ref(true)
 const error = ref(null)
 const isEditing = ref(false)
 const saving = ref(false)
+const telegramLoading = ref(false)
 
 /** Снимок данных для формы редактирования — создаётся при входе в режим редактирования */
 const editSnapshot = ref(null)
@@ -241,7 +249,6 @@ const startEditing = () => {
     last_name: u.last_name ?? '',
     middle_name: u.middle_name ?? '',
     date_of_birth: u.date_of_birth ?? '',
-    telegram_id: u.telegram_id ?? '',
   })
   isEditing.value = true
 }
@@ -262,7 +269,6 @@ const saveProfile = async () => {
       last_name: editSnapshot.value.last_name,
       middle_name: editSnapshot.value.middle_name || null,
       date_of_birth: editSnapshot.value.date_of_birth,
-      telegram_id: editSnapshot.value.telegram_id?.trim() || null,
     })
     const data = await handleResponse(response)
     user.value = data
@@ -274,6 +280,27 @@ const saveProfile = async () => {
     console.error('Error saving profile:', err)
   } finally {
     saving.value = false
+  }
+}
+
+const connectTelegram = async () => {
+  if (telegramLoading.value) return
+
+  try {
+    telegramLoading.value = true
+    const response = await apiPost(API_ENDPOINTS.TELEGRAM.CONNECT_LINK)
+    const data = await handleResponse(response)
+
+    if (!data?.url) {
+      throw new Error('Не удалось получить ссылку Telegram')
+    }
+
+    window.open(data.url, '_blank', 'noopener,noreferrer')
+    showInfo('Открой Telegram, нажми Start у бота, затем открой Novera из сообщения бота')
+  } catch (err) {
+    showError(err.message || 'Ошибка при подключении Telegram')
+  } finally {
+    telegramLoading.value = false
   }
 }
 

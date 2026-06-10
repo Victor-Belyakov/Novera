@@ -4,7 +4,7 @@
       <button
         type="button"
         @click="openAddModal"
-        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
+        class="px-4 py-2 app-btn-primary rounded-md transition-colors text-sm font-medium cursor-pointer flex items-center gap-2"
       >
         <span class="text-lg leading-none">+</span>
         Добавить
@@ -13,7 +13,7 @@
         type="button"
         @click="toggleTracker"
         class="px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors text-sm font-medium cursor-pointer"
-        :class="{ 'ring-2 ring-blue-950 bg-blue-50 text-blue-950 border-blue-950': showTracker }"
+        :class="{ 'ring-2 ring-blue-300 bg-blue-50 text-blue-700 border-blue-300': showTracker }"
       >
         Трекер
       </button>
@@ -55,7 +55,7 @@
                   <td class="px-4 py-2">
                     <template v-if="row.done">
                       <span
-                        class="inline-flex items-center justify-center w-8 h-8 rounded border bg-green-100 border-green-300 text-green-800"
+                        class="inline-flex items-center justify-center w-8 h-8 rounded border bg-blue-100 border-blue-300 text-blue-800"
                         title="Выполнено"
                       >
                         ✓
@@ -177,12 +177,12 @@
         @click.self="closeAddModal"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden border border-gray-100 flex flex-col">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0">
-            <h3 class="text-lg font-semibold text-white">Новая привычка</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 app-modal-header">
+            <h3 class="text-lg font-semibold">Новая привычка</h3>
             <button
               type="button"
               @click="closeAddModal"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer"
               aria-label="Закрыть"
             >
               ✕
@@ -233,7 +233,7 @@
                 <button
                   type="submit"
                   :disabled="saving"
-                  class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium shadow-sm transition"
+                  class="px-5 py-2.5 app-btn-primary rounded-lg disabled:opacity-50 text-sm font-medium transition"
                 >
                   {{ saving ? 'Сохранение...' : 'Создать' }}
                 </button>

@@ -5,6 +5,8 @@ import IconUsers from '@/components/icons/IconUsers.vue'
 import IconTasks from '@/components/icons/IconTasks.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import IconMenu from '@/components/icons/IconMenu.vue'
+import IconFinance from '@/components/icons/IconFinance.vue'
+import IconHealth from '@/components/icons/IconHealth.vue'
 
 export const ICON_COMPONENTS = {
   profile: IconProfile,
@@ -12,6 +14,8 @@ export const ICON_COMPONENTS = {
   home: IconDashboard,
   users: IconUsers,
   tasks: IconTasks,
+  finances: IconFinance,
+  health: IconHealth,
   goals: IconCheck,
   habits: IconTasks,
   menu: IconMenu,
@@ -20,4 +24,3 @@ export const ICON_COMPONENTS = {
 export function getIconComponent(iconName) {
   return ICON_COMPONENTS[iconName] || null
 }
-

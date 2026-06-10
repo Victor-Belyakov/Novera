@@ -36,6 +36,18 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: ROUTES.FINANCES,
+    name: ROUTE_NAMES.FINANCES,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.HEALTH,
+    name: ROUTE_NAMES.HEALTH,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
     path: ROUTES.GOALS,
     name: ROUTE_NAMES.GOALS,
     component: Home,
@@ -56,6 +68,18 @@ const routes = [
   {
     path: ROUTES.SETTINGS_CATEGORIES,
     name: ROUTE_NAMES.SETTINGS_CATEGORIES,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.SETTINGS_FINANCE_CATEGORIES,
+    name: ROUTE_NAMES.SETTINGS_FINANCE_CATEGORIES,
+    component: Home,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: ROUTES.SETTINGS_HEALTH_METRICS,
+    name: ROUTE_NAMES.SETTINGS_HEALTH_METRICS,
     component: Home,
     meta: { requiresAuth: true },
   },

@@ -42,7 +42,7 @@
             <th
               scope="col"
               class="users-table-cell py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:bg-gray-100"
-              :class="{ 'text-blue-950': sortBy === 'id' }"
+              :class="{ 'text-blue-700': sortBy === 'id' }"
               @click="sortByColumn('id')"
             >
               ID {{ sortBy === 'id' ? (sortOrder === 'ASC' ? '↑' : '↓') : '' }}
@@ -50,7 +50,7 @@
             <th
               scope="col"
               class="users-table-cell py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:bg-gray-100"
-              :class="{ 'text-blue-950': sortBy === 'fio' }"
+              :class="{ 'text-blue-700': sortBy === 'fio' }"
               @click="sortByColumn('fio')"
             >
               ФИО {{ sortBy === 'fio' ? (sortOrder === 'ASC' ? '↑' : '↓') : '' }}
@@ -58,7 +58,7 @@
             <th
               scope="col"
               class="users-table-cell py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:bg-gray-100"
-              :class="{ 'text-blue-950': sortBy === 'email' }"
+              :class="{ 'text-blue-700': sortBy === 'email' }"
               @click="sortByColumn('email')"
             >
               Email {{ sortBy === 'email' ? (sortOrder === 'ASC' ? '↑' : '↓') : '' }}
@@ -66,7 +66,7 @@
             <th
               scope="col"
               class="users-table-cell py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:bg-gray-100"
-              :class="{ 'text-blue-950': sortBy === 'phone' }"
+              :class="{ 'text-blue-700': sortBy === 'phone' }"
               @click="sortByColumn('phone')"
             >
               Телефон {{ sortBy === 'phone' ? (sortOrder === 'ASC' ? '↑' : '↓') : '' }}
@@ -74,7 +74,7 @@
             <th
               scope="col"
               class="users-table-cell py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:bg-gray-100"
-              :class="{ 'text-blue-950': sortBy === 'created_at' }"
+              :class="{ 'text-blue-700': sortBy === 'created_at' }"
               @click="sortByColumn('created_at')"
             >
               Дата создания {{ sortBy === 'created_at' ? (sortOrder === 'ASC' ? '↑' : '↓') : '' }}
@@ -122,12 +122,12 @@
         @click.self="userModal = null"
       >
         <div class="bg-white rounded-xl shadow-xl max-w-md w-full border border-gray-100 overflow-hidden">
-          <div class="p-6 flex items-center justify-between bg-blue-950 rounded-t-xl shrink-0">
-            <h3 class="text-lg font-semibold text-white">Пользователь</h3>
+          <div class="p-6 flex items-center justify-between rounded-t-xl shrink-0 app-modal-header">
+            <h3 class="text-lg font-semibold">Пользователь</h3>
             <button
               type="button"
               @click="userModal = null"
-              class="p-2 rounded-lg hover:bg-white/20 text-white transition cursor-pointer"
+              class="p-2 rounded-lg hover:bg-white/80 text-blue-700 transition cursor-pointer"
               aria-label="Закрыть"
             >
               ✕

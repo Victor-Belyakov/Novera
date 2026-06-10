@@ -6,7 +6,7 @@
     aria-label="Загрузка"
   >
     <svg
-      class="animate-spin text-blue-950"
+      class="animate-spin text-blue-500"
       :class="iconSizeClass"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

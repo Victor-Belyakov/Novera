@@ -36,6 +36,33 @@ return [
             [['_route' => 'app_reminder_reminder_list', '_controller' => 'App\\Reminder\\Controller\\ReminderController::list'], null, ['GET' => 0], null, false, false, null],
             [['_route' => 'app_reminder_reminder_create', '_controller' => 'App\\Reminder\\Controller\\ReminderController::create'], null, ['POST' => 0], null, false, false, null],
         ],
+        '/api/statistics' => [[['_route' => 'app_statistic_statistic_overview', '_controller' => 'App\\Statistic\\Controller\\StatisticController::overview'], null, ['GET' => 0], null, false, false, null]],
+        '/api/finance-categories' => [
+            [['_route' => 'app_financecategory_financecategory_list', '_controller' => 'App\\FinanceCategory\\Controller\\FinanceCategoryController::list'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_financecategory_financecategory_create', '_controller' => 'App\\FinanceCategory\\Controller\\FinanceCategoryController::create'], null, ['POST' => 0], null, false, false, null],
+        ],
+        '/api/finances' => [
+            [['_route' => 'app_finance_finance_list', '_controller' => 'App\\Finance\\Controller\\FinanceController::list'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_finance_finance_create', '_controller' => 'App\\Finance\\Controller\\FinanceController::create'], null, ['POST' => 0], null, false, false, null],
+        ],
+        '/api/finance-plans' => [
+            [['_route' => 'app_financeplan_financeplan_list', '_controller' => 'App\\FinancePlan\\Controller\\FinancePlanController::list'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_financeplan_financeplan_create', '_controller' => 'App\\FinancePlan\\Controller\\FinancePlanController::create'], null, ['POST' => 0], null, false, false, null],
+        ],
+        '/api/finance-plans/summary' => [[['_route' => 'app_financeplan_financeplan_summary', '_controller' => 'App\\FinancePlan\\Controller\\FinancePlanController::summary'], null, ['GET' => 0], null, false, false, null]],
+        '/api/personal-state' => [[['_route' => 'app_personalstate_personalstate_show', '_controller' => 'App\\PersonalState\\Controller\\PersonalStateController::show'], null, ['GET' => 0], null, false, false, null]],
+        '/api/health-metric-types' => [
+            [['_route' => 'app_healthmetrictype_healthmetrictype_list', '_controller' => 'App\\HealthMetricType\\Controller\\HealthMetricTypeController::list'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_healthmetrictype_healthmetrictype_create', '_controller' => 'App\\HealthMetricType\\Controller\\HealthMetricTypeController::create'], null, ['POST' => 0], null, false, false, null],
+        ],
+        '/api/health-metrics' => [
+            [['_route' => 'app_healthmetricentry_healthmetricentry_list', '_controller' => 'App\\HealthMetricEntry\\Controller\\HealthMetricEntryController::list'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_healthmetricentry_healthmetricentry_create', '_controller' => 'App\\HealthMetricEntry\\Controller\\HealthMetricEntryController::create'], null, ['POST' => 0], null, false, false, null],
+        ],
+        '/api/telegram/connect-link' => [[['_route' => 'app_telegram_telegram_connectlink', '_controller' => 'App\\Telegram\\Controller\\TelegramController::connectLink'], null, ['POST' => 0], null, false, false, null]],
+        '/api/telegram/webhook' => [[['_route' => 'app_telegram_telegram_webhook', '_controller' => 'App\\Telegram\\Controller\\TelegramController::webhook'], null, ['POST' => 0], null, false, false, null]],
+        '/api/telegram/auth' => [[['_route' => 'app_telegram_telegram_auth', '_controller' => 'App\\Telegram\\Controller\\TelegramController::auth'], null, ['POST' => 0], null, false, false, null]],
+        '/api/telegram/config' => [[['_route' => 'app_telegram_telegram_config', '_controller' => 'App\\Telegram\\Controller\\TelegramController::config'], null, ['GET' => 0], null, false, false, null]],
         '/api/auth/login' => [[['_route' => 'login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
@@ -55,6 +82,7 @@ return [
                     .'|reminders/(\\d+)(?'
                         .'|(*:195)'
                     .')'
+                    .'|finances/(\\d+)(*:218)'
                 .')'
             .')/?$}sDu',
     ],
@@ -73,6 +101,9 @@ return [
             [['_route' => 'app_reminder_reminder_show', '_controller' => 'App\\Reminder\\Controller\\ReminderController::show'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'app_reminder_reminder_update', '_controller' => 'App\\Reminder\\Controller\\ReminderController::update'], ['id'], ['PATCH' => 0], null, false, true, null],
             [['_route' => 'app_reminder_reminder_delete', '_controller' => 'App\\Reminder\\Controller\\ReminderController::delete'], ['id'], ['DELETE' => 0], null, false, true, null],
+        ],
+        218 => [
+            [['_route' => 'app_finance_finance_update', '_controller' => 'App\\Finance\\Controller\\FinanceController::update'], ['id'], ['PATCH' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

@@ -26,8 +26,6 @@ final class MarkSkippedHabitLogsCommand extends Command
         $today = new DateTimeImmutable('today');
         $conn = $this->em->getConnection();
 
-        // Все pending-логи за прошедшие дни считаем пропущенными.
-        // logged_at < today, status = 'pending' -> status = 'skipped'
         $affected = $conn->executeStatement(
             'UPDATE habit_logs SET status = :skipped WHERE status = :pending AND logged_at < :today',
             [
